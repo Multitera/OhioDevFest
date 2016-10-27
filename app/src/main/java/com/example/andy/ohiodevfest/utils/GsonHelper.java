@@ -5,6 +5,8 @@ import com.example.andy.ohiodevfest.model.Speaker;
 import com.example.andy.ohiodevfest.realm.RealmExclusionStrategy;
 import com.example.andy.ohiodevfest.realm.RealmInt;
 import com.example.andy.ohiodevfest.realm.RealmIntAdapter;
+import com.example.andy.ohiodevfest.realm.RealmIntList;
+import com.example.andy.ohiodevfest.realm.RealmIntListAdapter;
 import com.example.andy.ohiodevfest.realm.RealmString;
 import com.example.andy.ohiodevfest.realm.RealmStringAdapter;
 import com.google.gson.Gson;
@@ -23,6 +25,7 @@ public class GsonHelper {
         return new GsonBuilder().setExclusionStrategies(new RealmExclusionStrategy())
                 .registerTypeAdapter(new TypeToken<RealmList<RealmString>>(){}.getType(), new RealmStringAdapter())
                 .registerTypeAdapter(new TypeToken<RealmList<RealmInt>>(){}.getType(), new RealmIntAdapter())
+                .registerTypeAdapter(new TypeToken<RealmList<RealmIntList>>(){}.getType(), new RealmIntListAdapter())
                 .registerTypeAdapter(new TypeToken<RealmList<Session>>(){}.getType(), new SessionListDeserializer())
                 .registerTypeAdapter(new TypeToken<RealmList<Speaker>>(){}.getType(), new SpeakerListDeserializer())
                 .create();

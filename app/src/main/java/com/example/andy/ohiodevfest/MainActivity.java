@@ -2,6 +2,7 @@ package com.example.andy.ohiodevfest;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        }
     }
 
     @Override
@@ -69,8 +74,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
+        Fragment fragment = null;
 
+        if (id == R.id.nav_home) {
+            fragment = new HomeFragment();
         } else if (id == R.id.nav_schedule) {
 
         } else if (id == R.id.nav_speakers) {
@@ -79,8 +86,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_conduct) {
 
-        } else if (id == R.id.nav_settings) {
+        }
 
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

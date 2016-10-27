@@ -2,20 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/intro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <GridView
-        android:id="@+id/info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:columnWidth="90dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"/>
+
+    <include layout="@layout/home_intro" />
+
     <TextView
         android:id="@+id/featured_head"
         android:text="@string/featured_speakers"
@@ -36,30 +25,8 @@
         android:text="@string/view_all_speakers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/tickets_head"
-        android:text="@string/tickets"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <GridView
-        android:id="@+id/ticket_prices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:columnWidth="90dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tickets_foot"
-        android:text="@string/tickets_foot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/tickets_button"
-        android:text="@string/buy_your_ticket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+    <include layout="@layout/home_prices" />
+
 
 </LinearLayout>

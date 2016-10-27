@@ -13,4 +13,21 @@
     <string name="tickets">TICKETS</string>
     <string name="tickets_foot">Tickets grant access to all conference sessions, coffee breaks, and lunch. Accommodation is NOT included in the ticket price.</string>
     <string name="buy_your_ticket">BUY YOUR TICKET</string>
+    <string name="attendees_value">100</string>
+    <string name="attendees">Attendees</string>
+    <string name="day">Day</string>
+    <string name="sessions">Sessions</string>
+    <string name="parallel_tracks">Parallel tracks</string>
+    <string name="day_value">1</string>
+    <string name="sessions_value">12</string>
+    <string name="tracks_value">3</string>
+    <string name="offer_end_date">Ends on Sept 16, 2016</string>
+    <string name="professional_early_bird">Professional Early Bird</string>
+    <string name="professional_early_price">50</string>
+    <string name="student_early_bird">Student Early Bird</string>
+    <string name="early_student_price">25</string>
+    <string name="professional">Professional</string>
+    <string name="professional_price">65</string>
+    <string name="student">Student</string>
+    <string name="student_price">35</string>
 </resources>

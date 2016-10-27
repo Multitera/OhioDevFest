@@ -20,5 +20,5 @@ public interface OhioDevFestService {
     Observable<RealmList<Session>> sessions();
 
     @GET("data/schedule.json")
-    Observable<Schedule> schedule();
+    Observable<RealmList<Schedule>> schedule();
 }

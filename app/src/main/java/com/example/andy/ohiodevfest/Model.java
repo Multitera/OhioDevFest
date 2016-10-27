@@ -4,6 +4,7 @@ import com.example.andy.ohiodevfest.model.Schedule;
 import com.example.andy.ohiodevfest.model.Session;
 import com.example.andy.ohiodevfest.model.Speaker;
 import com.example.andy.ohiodevfest.service.OhioDevFestService;
+import com.example.andy.ohiodevfest.utils.GsonHelper;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -12,6 +13,8 @@ import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -37,19 +40,23 @@ public class Model implements Closeable{
 
     public Model() {
         realm = Realm.getDefaultInstance();
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://ohiodevfest.com/").build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://ohiodevfest.com/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(GsonHelper.getCustomGson()))
+                .build();
         festService = retrofit.create(OhioDevFestService.class);
-        updateData();
+//        updateData();
     }
 
     public void updateData (){
         festService.schedule()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Schedule>() {
+                .subscribe(new Action1<RealmList<Schedule>>() {
                     @Override
-                    public void call(Schedule schedule) {
-                        realm.insertOrUpdate(schedule);
+                    public void call(RealmList<Schedule> schedules) {
+                        realm.insert(schedules);
                     }
                 });
         festService.sessions()

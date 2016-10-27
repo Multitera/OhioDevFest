@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="info_types">
+        <item>Attendees</item>
+        <item>Day</item>
+        <item>Sessions</item>
+        <item>Parallel tracks</item>
+    </string-array>
+    <string-array name="info_values">
+        <item>100</item>
+        <item>1</item>
+        <item>12</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="ticket_names">
+        <item>Professional Early Bird</item>
+        <item>Student Early Bird</item>
+        <item>Professional</item>
+        <item>Student</item>
+    </string-array>
+    <string-array name="ticket_prices">
+        <item>50</item>
+        <item>25</item>
+        <item>65</item>
+        <item>35</item>
+    </string-array>
+    <string-array name="offer_ends">
+        <item>Sept 16, 2016</item>
+        <item>Sept 16, 2016</item>
+        <item>0</item>
+        <item>0</item>
+    </string-array>
+</resources>

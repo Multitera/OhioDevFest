@@ -11,7 +11,7 @@
         android:layout_height="140dp"
         android:elevation="12dp"
         android:id="@+id/view2"
-        app:cardCornerRadius="40dp"
+        app:cardCornerRadius="70dp"
         android:layout_centerHorizontal="true"
         android:innerRadius="0dp"
         android:shape="ring"
@@ -19,9 +19,8 @@
         <ImageView
             android:id="@+id/photo"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
     </android.support.v7.widget.CardView>
 
     <TextView

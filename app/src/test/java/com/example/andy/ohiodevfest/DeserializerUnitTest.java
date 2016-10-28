@@ -7,7 +7,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.junit.Test;
 
-import io.realm.RealmList;
+import java.util.List;
 
 /**
  * Created by andy on 10/25/16.
@@ -20,12 +20,12 @@ public class DeserializerUnitTest {
 
     @Test
     public void SessionListDeserializerTest() throws Exception {
-        RealmList<Session> sessions = GsonHelper.getCustomGson().fromJson(sessionJson, new TypeToken<RealmList<Session>>(){}.getType());
+        List<Session> sessions = GsonHelper.getCustomGson().fromJson(sessionJson, new TypeToken<List<Session>>(){}.getType());
         assert (sessions.isEmpty() == false);
     }
     @Test
     public void SpeakerListDeserializerTest() throws Exception {
-        RealmList<Speaker> speakers = GsonHelper.getCustomGson().fromJson(speakerJson, new TypeToken<RealmList<Speaker>>(){}.getType());
+        List<Speaker> speakers = GsonHelper.getCustomGson().fromJson(speakerJson, new TypeToken<List<Speaker>>(){}.getType());
         assert (speakers.isEmpty() == false);
     }
 }

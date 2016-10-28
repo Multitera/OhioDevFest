@@ -10,16 +10,15 @@ import java.io.Closeable;
 import java.io.IOException;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 import io.realm.RealmResults;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import rx.Subscription;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by andy on 10/26/16.
@@ -46,38 +45,49 @@ public class Model implements Closeable{
                 .addConverterFactory(GsonConverterFactory.create(GsonHelper.getCustomGson()))
                 .build();
         festService = retrofit.create(OhioDevFestService.class);
-//        updateData();
     }
 
-    public void updateData (){
-        festService.schedule()
+    public Subscription downloadSchedulesFromNetwork() {
+        return festService.schedule()
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<RealmList<Schedule>>() {
-                    @Override
-                    public void call(RealmList<Schedule> schedules) {
-                        realm.insert(schedules);
-                    }
-                });
-        festService.sessions()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<RealmList<Session>>() {
-                    @Override
-                    public void call(RealmList<Session> sessions) {
-                        realm.insertOrUpdate(sessions);
-                    }
-                });
-        festService.speakers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<RealmList<Speaker>>() {
-                    @Override
-                    public void call(RealmList<Speaker> speakers) {
-                        realm.insertOrUpdate(speakers);
-                    }
+                .subscribe(list -> {
+                    Realm.getDefaultInstance().executeTransaction(realm -> realm.insertOrUpdate(list));
                 });
     }
+
+    public Subscription downloadSpeakersFromNetwork() {
+        return festService.speakers()
+                .subscribeOn(Schedulers.io())
+                .subscribe(list -> {
+                    Realm.getDefaultInstance().executeTransaction(realm -> realm.insertOrUpdate(list));
+                });
+    }
+
+    public Subscription downloadSessionsFromNetwork() {
+        return festService.sessions()
+                .subscribeOn(Schedulers.io())
+                .subscribe(list -> {
+                    Realm.getDefaultInstance().executeTransaction(realm -> realm.insertOrUpdate(list));
+                });
+    }
+
+    public CompositeSubscription updateData (){
+        CompositeSubscription subscriptions = new CompositeSubscription();
+        subscriptions.add(downloadSchedulesFromNetwork());
+        subscriptions.add(downloadSessionsFromNetwork());
+        subscriptions.add(downloadSpeakersFromNetwork());
+        return subscriptions;
+    }
+
+/*    public Subscription readFromRealm() {
+        return realm.where(SomeObject.class)
+                .findAllAsync()
+                .asObservable()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter(RealmResults::isLoaded)
+                .subscribe(objects -> adapter.updateData(objects));
+    }*/
 
     public Observable<RealmResults<Schedule>> getSchedule(){
         return realm.where(Schedule.class)

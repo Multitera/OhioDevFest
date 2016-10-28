@@ -9,18 +9,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-
-import io.realm.RealmList;
 
 /**
  * Created by andy on 10/25/16.
  */
 
-public class SessionListDeserializer implements JsonDeserializer<RealmList<Session>> {
+public class SessionListDeserializer implements JsonDeserializer<List<Session>> {
     @Override
-    public RealmList<Session> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        RealmList<Session> list = new RealmList<>();
+    public List<Session> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        List<Session> list = new ArrayList<>();
         if (json.isJsonObject()) {
             JsonObject object = json.getAsJsonObject();
             Gson customGson = GsonHelper.getCustomGson();

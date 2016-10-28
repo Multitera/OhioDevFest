@@ -4,7 +4,8 @@ import com.example.andy.ohiodevfest.model.Schedule;
 import com.example.andy.ohiodevfest.model.Session;
 import com.example.andy.ohiodevfest.model.Speaker;
 
-import io.realm.RealmList;
+import java.util.List;
+
 import retrofit2.http.GET;
 import rx.Observable;
 
@@ -14,11 +15,11 @@ import rx.Observable;
 
 public interface OhioDevFestService {
     @GET("data/speakers.json")
-    Observable<RealmList<Speaker>> speakers();
+    Observable<List<Speaker>> speakers();
 
     @GET("data/sessions.json")
-    Observable<RealmList<Session>> sessions();
+    Observable<List<Session>> sessions();
 
     @GET("data/schedule.json")
-    Observable<RealmList<Schedule>> schedule();
+    Observable<List<Schedule>> schedule();
 }

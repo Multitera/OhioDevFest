@@ -13,6 +13,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.List;
+
 import io.realm.RealmList;
 
 /**
@@ -26,8 +28,8 @@ public class GsonHelper {
                 .registerTypeAdapter(new TypeToken<RealmList<RealmString>>(){}.getType(), new RealmStringAdapter())
                 .registerTypeAdapter(new TypeToken<RealmList<RealmInt>>(){}.getType(), new RealmIntAdapter())
                 .registerTypeAdapter(new TypeToken<RealmList<RealmIntList>>(){}.getType(), new RealmIntListAdapter())
-                .registerTypeAdapter(new TypeToken<RealmList<Session>>(){}.getType(), new SessionListDeserializer())
-                .registerTypeAdapter(new TypeToken<RealmList<Speaker>>(){}.getType(), new SpeakerListDeserializer())
+                .registerTypeAdapter(new TypeToken<List<Session>>(){}.getType(), new SessionListDeserializer())
+                .registerTypeAdapter(new TypeToken<List<Speaker>>(){}.getType(), new SpeakerListDeserializer())
                 .create();
     }
 }

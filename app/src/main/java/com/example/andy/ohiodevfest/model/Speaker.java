@@ -4,6 +4,7 @@ import com.example.andy.ohiodevfest.realm.RealmString;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by andy on 10/25/16.
@@ -11,6 +12,7 @@ import io.realm.RealmObject;
 
 public class Speaker  extends RealmObject {
 
+    @PrimaryKey
     private int id;
     private boolean featured;
     private String name;

@@ -11,12 +11,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.andy.ohiodevfest.model.Speaker;
 import com.example.andy.ohiodevfest.utils.Presenter;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Presenter presenter = new Presenter(this, Model.getInstance());
+    private enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
+    private FragmentTags currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +40,17 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new HomeFragment(), FragmentTags.HOME.toString())
+                    .commit();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onPause();
     }
 
     @Override
@@ -77,7 +91,10 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
 
         if (id == R.id.nav_home) {
-            fragment = new HomeFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new HomeFragment(), FragmentTags.HOME.toString())
+                    .commit();
         } else if (id == R.id.nav_schedule) {
 
         } else if (id == R.id.nav_speakers) {
@@ -89,11 +106,32 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        FragmentTags fragmentTag = FragmentTags.valueOf(fragment.getTag());
+
+        //#enumsMatter
+        switch (fragmentTag) {
+            case HOME:
+                currentFragment = fragmentTag;
+                presenter.getSpeakers(true);
+                break;
+        }
+    }
+
+    public void pushSpeakers (List<Speaker> speakers) {
+        switch (currentFragment) {
+            case HOME:
+                ((HomeFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateSpeakers(speakers);
+                break;
+        }
     }
 }

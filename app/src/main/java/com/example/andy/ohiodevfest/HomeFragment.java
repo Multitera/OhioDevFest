@@ -25,7 +25,6 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mAdapter = new FeaturedSpeakerAdapter(getContext());
         mGridView = (GridView) view.findViewById(R.id.featured_speakers);
         View emptyView = view.findViewById(R.id.empty_speakers);
         mGridView.setEmptyView(emptyView);
@@ -33,7 +32,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
-    public void populateFeaturedSpeakers(List<Speaker> speakers) {
+    public void populateSpeakers(List<Speaker> speakers) {
         if(mAdapter == null) {
             mAdapter = new FeaturedSpeakerAdapter(getContext());
             mGridView.setAdapter(mAdapter);

@@ -13,11 +13,25 @@ public class Presenter {
 
     private final MainActivity view;
     private final Model model;
-    private CompositeSubscription subscriptions = new CompositeSubscription();
+    private CompositeSubscription modelSubscriptions = new CompositeSubscription();
+    private CompositeSubscription viewSubscriptions = new CompositeSubscription();
 
     public Presenter(MainActivity view, Model model) {
         this.view = view;
         this.model = model;
-        subscriptions = model.updateData();
+        if (modelSubscriptions.hasSubscriptions())
+            modelSubscriptions.unsubscribe();
+        modelSubscriptions = model.updateData();
+    }
+
+    public void getSpeakers(Boolean featured) {
+        if (viewSubscriptions.hasSubscriptions())
+            viewSubscriptions.unsubscribe();
+        viewSubscriptions.add(model.findSpeakers(featured).subscribe(view::pushSpeakers));
+    }
+
+    public void onPause() {
+        modelSubscriptions.unsubscribe();
+        viewSubscriptions.unsubscribe();
     }
 }

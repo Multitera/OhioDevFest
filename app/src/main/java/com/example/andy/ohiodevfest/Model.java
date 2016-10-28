@@ -10,13 +10,13 @@ import java.io.Closeable;
 import java.io.IOException;
 
 import io.realm.Realm;
+import io.realm.RealmObject;
 import io.realm.RealmResults;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscription;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -89,40 +89,38 @@ public class Model implements Closeable{
                 .subscribe(objects -> adapter.updateData(objects));
     }*/
 
-    public Observable<RealmResults<Schedule>> getSchedule(){
+    public Observable<RealmObject> findSchedule(String date){
         return realm.where(Schedule.class)
-                .findAllAsync()
-                .asObservable()
-                .filter(new Func1<RealmResults<Schedule>, Boolean>() {
-                    @Override
-                    public Boolean call(RealmResults<Schedule> schedules) {
-                        return schedules.isLoaded();
-                    }
-                });
+                .equalTo("date", date)
+                .findFirstAsync()
+                .asObservable().filter(Schedule::isLoaded);
     }
 
-    public Observable<RealmResults<Session>> getSessions(){
+    public Observable<RealmResults<Session>> findSessions(Integer[] ids){
+        if (ids == null)
         return realm.where(Session.class)
                 .findAllAsync()
                 .asObservable()
-                .filter(new Func1<RealmResults<Session>, Boolean>() {
-                    @Override
-                    public Boolean call(RealmResults<Session> sessions) {
-                        return sessions.isLoaded();
-                    }
-                });
+                .filter(RealmResults::isLoaded);
+        else
+            return realm.where(Session.class)
+                    .in("id", ids).findAllAsync()
+                    .asObservable()
+                    .filter(RealmResults::isLoaded);
     }
 
-    public Observable<RealmResults<Speaker>> getSpeakers(){
-        return realm.where(Speaker.class)
+    public Observable<RealmResults<Speaker>> findSpeakers(Boolean featured){
+        if (featured)
+            return realm.where(Speaker.class)
+                    .equalTo("featured", true)
+                    .findAllAsync()
+                    .asObservable()
+                    .filter(RealmResults::isLoaded);
+        else
+            return realm.where(Speaker.class)
                 .findAllAsync()
                 .asObservable()
-                .filter(new Func1<RealmResults<Speaker>, Boolean>() {
-                    @Override
-                    public Boolean call(RealmResults<Speaker> speakers) {
-                        return speakers.isLoaded();
-                    }
-                });
+                .filter(RealmResults::isLoaded);
     }
 
     @Override

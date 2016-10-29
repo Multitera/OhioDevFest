@@ -47,8 +47,10 @@ public class FeaturedSpeakerAdapter extends RecyclerView.Adapter<FeaturedSpeaker
 
     @Override
     public int getItemCount() {
-
-        return featuredSpeakers.size();
+        if (featuredSpeakers.size() >= 4)
+            return 4;
+        else
+            return 0;
     }
 
     public void setFeaturedSpeakers(List<Speaker> featuredSpeakers) {

@@ -79,16 +79,6 @@ public class Model implements Closeable{
         return subscriptions;
     }
 
-/*    public Subscription readFromRealm() {
-        return realm.where(SomeObject.class)
-                .findAllAsync()
-                .asObservable()
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .filter(RealmResults::isLoaded)
-                .subscribe(objects -> adapter.updateData(objects));
-    }*/
-
     public Observable<RealmObject> findSchedule(String date){
         return realm.where(Schedule.class)
                 .equalTo("date", date)

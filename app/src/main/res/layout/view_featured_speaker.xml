@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="140dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:layout_width="140dp"
         android:layout_height="140dp"
+        android:layout_gravity="center"
         android:elevation="12dp"
         android:id="@+id/view2"
         app:cardCornerRadius="70dp"
-        android:layout_centerHorizontal="true"
         android:innerRadius="0dp"
         android:shape="ring"
         android:thicknessRatio="1.9" >

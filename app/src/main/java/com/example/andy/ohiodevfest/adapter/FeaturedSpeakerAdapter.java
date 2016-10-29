@@ -1,10 +1,10 @@
 package com.example.andy.ohiodevfest.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,58 +18,53 @@ import java.util.List;
  * Created by andy on 10/28/16.
  */
 
-public class FeaturedSpeakerAdapter extends BaseAdapter {
+public class FeaturedSpeakerAdapter extends RecyclerView.Adapter<FeaturedSpeakerAdapter.ViewHolder> {
 
-    private Context context;
-    private LayoutInflater inflater;
     private List<Speaker> featuredSpeakers = null;
+    private Context context;
 
-    public FeaturedSpeakerAdapter(Context context) {
-        this.context = context;
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-    public void setData(List<Speaker> speakers) {
-        this.featuredSpeakers = speakers;
+    @Override
+    public FeaturedSpeakerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
+        View view = LayoutInflater.from(context).inflate(R.layout.view_featured_speaker, parent, false);
+        return new FeaturedSpeakerAdapter.ViewHolder(view);
     }
 
     @Override
-    public int getCount() {
-        if (featuredSpeakers == null) {
-            return 0;
+    public void onBindViewHolder(FeaturedSpeakerAdapter.ViewHolder holder, int position) {
+
+        Speaker speaker = featuredSpeakers.get(position);
+
+        if (speaker != null) {
+            holder.name.setText(speaker.getName());
+            holder.company.setText(speaker.getCompany());
+            Picasso.with(context)
+                    .load("https://ohiodevfest.com"+speaker.getPhotoUrl())
+                    .into(holder.photo);
         }
+
+    }
+
+    @Override
+    public int getItemCount() {
+
         return featuredSpeakers.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        if (featuredSpeakers == null || featuredSpeakers.get(i) == null) {
-            return null;
-        }
-        return featuredSpeakers.get(i);
+    public void setFeaturedSpeakers(List<Speaker> featuredSpeakers) {
+        this.featuredSpeakers = featuredSpeakers;
     }
 
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        TextView company;
+        ImageView photo;
+        public ViewHolder(View itemView) {
 
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null) {
-            view = inflater.inflate(R.layout.view_featured_speaker, viewGroup, false);
+            super(itemView);
+            name = (TextView) itemView.findViewById(R.id.name);
+            company = (TextView) itemView.findViewById(R.id.company);
+            photo = (ImageView) itemView.findViewById(R.id.photo);
         }
-
-        Speaker speaker = featuredSpeakers.get(i);
-
-        if (speaker != null) {
-            ((TextView) view.findViewById(R.id.name)).setText(speaker.getName());
-            ((TextView) view.findViewById(R.id.company)).setText(speaker.getCompany());
-            Picasso.with(context)
-                    .load("https://ohiodevfest.com"+speaker.getPhotoUrl())
-                    .into((ImageView) view.findViewById(R.id.photo));
-        }
-
-        return view;
     }
 }

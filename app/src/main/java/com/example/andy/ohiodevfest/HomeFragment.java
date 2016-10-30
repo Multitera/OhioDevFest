@@ -19,28 +19,26 @@ import java.util.List;
 
 public class HomeFragment extends android.support.v4.app.Fragment {
 
-    private RecyclerView mRecyclerView;
-    private GridLayoutManager mLayout;
-    private FeaturedSpeakerAdapter mAdapter;
+    private RecyclerView recyclerView;
+    private FeaturedSpeakerAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mLayout = new GridLayoutManager(getContext(), getResources().getInteger(R.integer.spanCount));
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.featured_speakers);
-        mRecyclerView.setLayoutManager(mLayout);
+        recyclerView = (RecyclerView) view.findViewById(R.id.featured_speakers);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.spanCount)));
 
         return view;
     }
 
     public void populateSpeakers(List<Speaker> speakers) {
-        if(mAdapter == null) {
-            mAdapter = new FeaturedSpeakerAdapter();
-            mRecyclerView.setAdapter(mAdapter);
+        if(adapter == null) {
+            adapter = new FeaturedSpeakerAdapter();
+            recyclerView.setAdapter(adapter);
         }
-        mAdapter.setFeaturedSpeakers(speakers);
-        mAdapter.notifyDataSetChanged();
-        mRecyclerView.invalidate();
+        adapter.setFeaturedSpeakers(speakers);
+        adapter.notifyDataSetChanged();
+        recyclerView.invalidate();
     }
 }

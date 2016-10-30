@@ -5,4 +5,5 @@
     <color name="colorPrimaryLight">#B2EBF2</color>
     <color name="colorAccent">#CDDC39</color>
     <color name="transparentWhite">#00FFFFFF</color>
+    <color name="grey_icon">#727272</color>
 </resources>

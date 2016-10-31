@@ -1,5 +1,8 @@
 package com.example.andy.ohiodevfest;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,7 +13,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.example.andy.ohiodevfest.ui.fragment.HomeFragment;
+import com.example.andy.ohiodevfest.ui.fragment.SpeakerListFragment;
 import com.example.andy.ohiodevfest.model.Speaker;
 import com.example.andy.ohiodevfest.utils.Presenter;
 
@@ -98,14 +104,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_schedule) {
 
         } else if (id == R.id.nav_speakers) {
-
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new SpeakerListFragment(), FragmentTags.SPEAKERS.toString())
+                    .commit();
         } else if (id == R.id.nav_partners) {
 
         } else if (id == R.id.nav_conduct) {
 
-        }
-
-        if (fragment != null) {
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -124,6 +130,10 @@ public class MainActivity extends AppCompatActivity
                 currentFragment = fragmentTag;
                 presenter.getSpeakers(true);
                 break;
+            case SPEAKERS:
+                currentFragment = fragmentTag;
+                presenter.getSpeakers(true);
+                break;
         }
     }
 
@@ -132,6 +142,31 @@ public class MainActivity extends AppCompatActivity
             case HOME:
                 ((HomeFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateSpeakers(speakers);
                 break;
+            case SPEAKERS:
+                ((SpeakerListFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateSpeakers(speakers);
+                break;
+        }
+    }
+
+    public void openGPlus(View view) {
+        String profile = (String) view.getTag();
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setClassName("com.google.android.apps.plus",
+                    "com.google.android.apps.plus.phone.UrlGatewayActivity");
+            intent.putExtra("customAppUri", profile);
+            startActivity(intent);
+        } catch(ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/"+profile)));
+        }
+    }
+
+    public void openTwitter(View view) {
+        String twitterName = (String) view.getTag();
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("twitter://user?screen_name=" + twitterName)));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://twitter.com/#!/" + twitterName)));
         }
     }
 }

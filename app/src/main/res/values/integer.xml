@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="spanCount">2</integer>
+    <integer name="featuredSpanCount">2</integer>
+    <integer name="speakerListSpanCount">1</integer>
+    <integer name="twitterStart">20</integer>
+    <integer name="gPlusStart">24</integer>
+    <integer name="bioCutOff">220</integer>
 </resources>

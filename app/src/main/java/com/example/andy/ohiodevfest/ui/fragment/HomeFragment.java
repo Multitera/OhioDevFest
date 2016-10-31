@@ -1,4 +1,4 @@
-package com.example.andy.ohiodevfest;
+package com.example.andy.ohiodevfest.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.andy.ohiodevfest.adapter.FeaturedSpeakerAdapter;
+import com.example.andy.ohiodevfest.R;
+import com.example.andy.ohiodevfest.ui.adapter.FeaturedSpeakerAdapter;
 import com.example.andy.ohiodevfest.model.Speaker;
 
 import java.util.List;
@@ -27,7 +28,8 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.featured_speakers);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.spanCount)));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.featuredSpanCount)));
+        recyclerView.setNestedScrollingEnabled(false);
 
         return view;
     }

@@ -26,7 +26,7 @@ public class Presenter {
 
     public void getSpeakers(Boolean featured) {
         if (viewSubscriptions.hasSubscriptions())
-            viewSubscriptions.unsubscribe();
+            viewSubscriptions.clear();
         viewSubscriptions.add(model.findSpeakers(featured).subscribe(view::pushSpeakers));
     }
 

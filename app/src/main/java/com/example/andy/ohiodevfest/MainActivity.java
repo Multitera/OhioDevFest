@@ -48,10 +48,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        getSupportFragmentManager().addOnBackStackChangedListener(
+                () -> {
+                });
+
+
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new HomeFragment(), FragmentTags.HOME.toString())
+                    .addToBackStack(null)
                     .commit();
         }
     }
@@ -103,6 +109,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new HomeFragment(), FragmentTags.HOME.toString())
+                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_schedule) {
 
@@ -110,6 +117,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new SpeakerListFragment(), FragmentTags.SPEAKERS.toString())
+                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_partners) {
 
@@ -125,6 +133,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
+        refreshFragment(fragment);
+    }
+
+    private void refreshFragment(Fragment fragment) {
         FragmentTags fragmentTag = FragmentTags.valueOf(fragment.getTag());
 
         //#enumsMatter
@@ -173,6 +185,7 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, new SpeakerFragment(), FragmentTags.SPEAKER.toString())
+                .addToBackStack(null)
                 .commit();
     }
 

@@ -42,9 +42,17 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
         twitter = (ImageView) view.findViewById(R.id.twitter);
         gPlus = (ImageView) view.findViewById(R.id.g_plus);
         recyclerView = (RecyclerView) view.findViewById(R.id.sessions);
-        recyclerView.setNestedScrollingEnabled(false);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView.setNestedScrollingEnabled(false);
+        if (recyclerView.getAdapter() == null && adapter != null)
+            recyclerView.setAdapter(adapter);
     }
 
     public void setSpeaker(Speaker speaker) {

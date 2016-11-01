@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.andy.ohiodevfest.R;
-import com.example.andy.ohiodevfest.ui.adapter.SpeakerAdapter;
 import com.example.andy.ohiodevfest.model.Speaker;
+import com.example.andy.ohiodevfest.ui.adapter.SpeakerAdapter;
 
 import java.util.List;
 
@@ -28,10 +28,18 @@ public class SpeakerListFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_speaker_list, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.speakers);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.speakerListSpanCount)));
-        recyclerView.setNestedScrollingEnabled(false);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.speakerListSpanCount)));
+        recyclerView.setNestedScrollingEnabled(false);
+        if (recyclerView.getAdapter() == null && adapter != null)
+            recyclerView.setAdapter(adapter);
     }
 
     public void populateSpeakers(List<Speaker> speakers) {

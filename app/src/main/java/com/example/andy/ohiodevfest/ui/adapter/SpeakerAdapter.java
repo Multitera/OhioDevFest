@@ -71,7 +71,10 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return speakers.size();
+        if (speakers == null)
+            return 0;
+        else
+            return speakers.size();
     }
 
     public void setSpeakers(List<Speaker> featuredSpeakers) {

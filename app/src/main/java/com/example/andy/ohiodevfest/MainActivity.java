@@ -139,7 +139,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case SPEAKER:
                 currentFragment = fragmentTag;
-                presenter.getSpeakers(true, null);
+                Integer[] ids = {speakerId};
+                presenter.getSpeakers(true, ids);
                 break;
         }
     }

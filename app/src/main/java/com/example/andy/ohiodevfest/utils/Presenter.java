@@ -24,10 +24,16 @@ public class Presenter {
         modelSubscriptions = model.updateData();
     }
 
-    public void getSpeakers(Boolean featured) {
+    public void getSpeakers(Boolean featured, Integer[] ids) {
         if (viewSubscriptions.hasSubscriptions())
             viewSubscriptions.clear();
-        viewSubscriptions.add(model.findSpeakers(featured).subscribe(view::pushSpeakers));
+        viewSubscriptions.add(model.findSpeakers(featured, ids).subscribe(view::pushSpeakers));
+    }
+
+    public void getSessions(Integer[] ids) {
+        if (viewSubscriptions.hasSubscriptions())
+            viewSubscriptions.clear();
+        viewSubscriptions.add(model.findSessions(ids).subscribe(view::pushSessions));
     }
 
     public void onPause() {

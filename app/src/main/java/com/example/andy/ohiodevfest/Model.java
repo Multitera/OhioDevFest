@@ -94,13 +94,20 @@ public class Model implements Closeable{
                 .filter(RealmResults::isLoaded);
         else
             return realm.where(Session.class)
-                    .in("id", ids).findAllAsync()
+                    .in("id", ids)
+                    .findAllAsync()
                     .asObservable()
                     .filter(RealmResults::isLoaded);
     }
 
-    public Observable<RealmResults<Speaker>> findSpeakers(Boolean featured){
-        if (featured)
+    public Observable<RealmResults<Speaker>> findSpeakers(Boolean featured, Integer[] ids){
+        if (ids != null) {
+            return realm.where(Speaker.class)
+                    .in("id",ids)
+                    .findAllAsync()
+                    .asObservable()
+                    .filter(RealmResults::isLoaded);
+        } else if (featured)
             return realm.where(Speaker.class)
                     .equalTo("featured", true)
                     .findAllAsync()

@@ -15,9 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.andy.ohiodevfest.ui.fragment.HomeFragment;
-import com.example.andy.ohiodevfest.ui.fragment.SpeakerListFragment;
+import com.example.andy.ohiodevfest.model.Session;
 import com.example.andy.ohiodevfest.model.Speaker;
+import com.example.andy.ohiodevfest.ui.fragment.HomeFragment;
+import com.example.andy.ohiodevfest.ui.fragment.SpeakerFragment;
+import com.example.andy.ohiodevfest.ui.fragment.SpeakerListFragment;
 import com.example.andy.ohiodevfest.utils.Presenter;
 
 import java.util.List;
@@ -26,8 +28,9 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Presenter presenter = new Presenter(this, Model.getInstance());
-    private enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
+    private enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT, SPEAKER, SESSION}
     private FragmentTags currentFragment;
+    private int speakerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,11 +131,15 @@ public class MainActivity extends AppCompatActivity
         switch (fragmentTag) {
             case HOME:
                 currentFragment = fragmentTag;
-                presenter.getSpeakers(true);
+                presenter.getSpeakers(true, null);
                 break;
             case SPEAKERS:
                 currentFragment = fragmentTag;
-                presenter.getSpeakers(true);
+                presenter.getSpeakers(true, null);
+                break;
+            case SPEAKER:
+                currentFragment = fragmentTag;
+                presenter.getSpeakers(true, null);
                 break;
         }
     }
@@ -145,7 +152,27 @@ public class MainActivity extends AppCompatActivity
             case SPEAKERS:
                 ((SpeakerListFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateSpeakers(speakers);
                 break;
+            case SPEAKER:
+                SpeakerFragment speakerFragment = (SpeakerFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString());
+                speakerFragment.setSpeaker(speakers.get(0));
+                break;
         }
+    }
+
+    public void pushSessions (List<Session> sessions) {
+        switch (currentFragment) {
+            case SPEAKER:
+                ((SpeakerFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateSessions(sessions);
+                break;
+        }
+    }
+
+    public void openSpeaker(View view) {
+        speakerId = (int) view.getTag();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new SpeakerFragment(), FragmentTags.SPEAKER.toString())
+                .commit();
     }
 
     public void openGPlus(View view) {

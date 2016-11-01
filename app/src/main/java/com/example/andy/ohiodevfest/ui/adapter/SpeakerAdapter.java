@@ -48,6 +48,8 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.ViewHold
             else
                 holder.bio.setText(speaker.getBio());
 
+            holder.bio.setTag(speaker.getId());
+
             Picasso.with(context)
                     .load("https://ohiodevfest.com"+speaker.getPhotoUrl())
                     .into(holder.photo);

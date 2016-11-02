@@ -1,6 +1,5 @@
-package com.example.andy.ohiodevfest.utils;
+package com.example.andy.ohiodevfest.ui;
 
-import com.example.andy.ohiodevfest.MainActivity;
 import com.example.andy.ohiodevfest.Model;
 
 import rx.subscriptions.CompositeSubscription;

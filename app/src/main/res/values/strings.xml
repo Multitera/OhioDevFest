@@ -31,4 +31,5 @@
     <string name="student">Student</string>
     <string name="student_price">35</string>
     <string name="read_more">Read more</string>
+    <string name="transition_name_photo">photo</string>
 </resources>

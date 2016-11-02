@@ -1,15 +1,23 @@
 package com.example.andy.ohiodevfest.model;
 
+import com.example.andy.ohiodevfest.realm.RealmListParcelConverter;
 import com.example.andy.ohiodevfest.realm.RealmString;
+
+import org.parceler.Parcel;
+import org.parceler.ParcelPropertyConverter;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.SpeakerRealmProxy;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by andy on 10/25/16.
  */
 
+@Parcel(implementations = { SpeakerRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { Speaker.class })
 public class Speaker  extends RealmObject {
 
     @PrimaryKey
@@ -96,10 +104,12 @@ public class Speaker  extends RealmObject {
         this.bio = bio;
     }
 
+    @ParcelPropertyConverter(RealmListParcelConverter.class)
     public void setTags(RealmList<RealmString> tags) {
         this.tags = tags;
     }
 
+    @ParcelPropertyConverter(RealmListParcelConverter.class)
     public void setSocials(RealmList<Social> socials) {
         this.socials = socials;
     }

@@ -3,6 +3,7 @@ package com.example.andy.ohiodevfest.ui.adapter;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +49,7 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.ViewHold
             else
                 holder.bio.setText(speaker.getBio());
 
-            holder.bio.setTag(speaker.getId());
+            holder.card.setTag(speaker);
 
             Picasso.with(context)
                     .load("https://ohiodevfest.com"+speaker.getPhotoUrl())
@@ -83,6 +84,7 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        CardView card;
         TextView name;
         TextView company;
         TextView bio;
@@ -93,6 +95,7 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.ViewHold
         public ViewHolder(View itemView) {
 
             super(itemView);
+            card = (CardView) itemView.findViewById(R.id.speaker_card);
             name = (TextView) itemView.findViewById(R.id.name);
             company = (TextView) itemView.findViewById(R.id.company);
             photo = (ImageView) itemView.findViewById(R.id.photo);

@@ -31,6 +31,7 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
     ImageView gPlus;
     private RecyclerView recyclerView;
     private SessionViewAdapter adapter;
+    private Speaker speaker;
 
     @Nullable
     @Override
@@ -49,13 +50,6 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        recyclerView.setNestedScrollingEnabled(false);
-        if (recyclerView.getAdapter() == null && adapter != null)
-            recyclerView.setAdapter(adapter);
-    }
-
-    public void setSpeaker(Speaker speaker) {
         company.setText(speaker.getCompany());
         bio.setText(speaker.getBio());
         Resources resources = getContext().getResources();
@@ -69,6 +63,14 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
                 gPlus.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_google_plus_box, null));
             }
         }
+
+        recyclerView.setNestedScrollingEnabled(false);
+        if (recyclerView.getAdapter() == null && adapter != null)
+            recyclerView.setAdapter(adapter);
+    }
+
+    public void setSpeaker(Speaker speaker) {
+        this.speaker = speaker;
     }
 
     public void populateSessions(List<Session> sessions) {

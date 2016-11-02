@@ -1,11 +1,17 @@
 package com.example.andy.ohiodevfest.model;
 
+import org.parceler.Parcel;
+
 import io.realm.RealmObject;
+import io.realm.SocialRealmProxy;
 
 /**
  * Created by andy on 10/25/16.
  */
 
+@Parcel(implementations = { SocialRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { Social.class })
 public class Social  extends RealmObject {
 
     private String name;

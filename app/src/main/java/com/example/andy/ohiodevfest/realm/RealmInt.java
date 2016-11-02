@@ -1,11 +1,16 @@
 package com.example.andy.ohiodevfest.realm;
 
+import org.parceler.Parcel;
+
+import io.realm.RealmIntRealmProxy;
 import io.realm.RealmObject;
 
 /**
  * Created by andy on 10/25/16.
  */
-
+@Parcel(implementations = { RealmIntRealmProxy.class },
+        value = Parcel.Serialization.BEAN,
+        analyze = { RealmInt.class })
 public class RealmInt extends RealmObject {
     private int val;
 

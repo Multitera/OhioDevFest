@@ -41,6 +41,7 @@ public class FeaturedSpeakerAdapter extends RecyclerView.Adapter<FeaturedSpeaker
             Picasso.with(context)
                     .load("https://ohiodevfest.com"+speaker.getPhotoUrl())
                     .into(holder.photo);
+            holder.photo.setTag(speaker);
         }
 
     }

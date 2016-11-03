@@ -32,4 +32,24 @@
     <string name="student_price">35</string>
     <string name="read_more">Read more</string>
     <string name="transition_name_photo">photo</string>
+    <string name="event_sponsorships">Ohio DevFest 2016​ welcomes businesses that are looking to increase their presence in the Ohio regional tech communities by reaching local developers and technology focused individuals through event sponsorships.</string>
+    <string name="partners">PARTNERS</string>
+    <string name="venue_sponsor">Venue Sponsor</string>
+    <string name="uc_url">https://www.uc.edu/</string>
+    <string name="uc_it_url">http://cech.uc.edu/it.html</string>
+    <string name="gold_sponsor">Gold Sponsor</string>
+    <string name="kroger_url">https://www.kroger.com/LiveKT</string>
+    <string name="bronze_sponsors">Bronze Sponsors</string>
+    <string name="cardinal_url">http://www.cardinalsolutions.com/</string>
+    <string name="dotloop_url">https://www.dotloop.com/</string>
+    <string name="lcs_url">https://www.lcs.com/</string>
+    <string name="krush_url">http://www.krush.com/</string>
+    <string name="road_tripper_url">https://roadtrippers.com/</string>
+    <string name="callibrity_url">http://www.callibrity.com/</string>
+    <string name="meddata_url">http://www.meddata.com/</string>
+    <string name="google_url">https://www.google.com/</string>
+    <string name="event_sponsor">Event Sponsor</string>
+    <string name="organizers">Organizers</string>
+    <string name="gdg_cin_url">https://www.meetup.com/cincy-android/</string>
+    <string name="gdg_col_url">https://www.meetup.com/GDG-Columbus/</string>
 </resources>

@@ -22,6 +22,7 @@ import com.example.andy.ohiodevfest.R;
 import com.example.andy.ohiodevfest.model.Session;
 import com.example.andy.ohiodevfest.model.Speaker;
 import com.example.andy.ohiodevfest.ui.fragment.HomeFragment;
+import com.example.andy.ohiodevfest.ui.fragment.PartnersFragment;
 import com.example.andy.ohiodevfest.ui.fragment.SpeakerListFragment;
 
 import org.parceler.Parcels;
@@ -116,6 +117,10 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.fragment_container, new SpeakerListFragment(), FragmentTags.SPEAKERS.toString())
                     .commit();
         } else if (id == R.id.nav_partners) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new PartnersFragment(), FragmentTags.PARTNERS.toString())
+                    .commit();
 
         } else if (id == R.id.nav_conduct) {
 
@@ -193,5 +198,9 @@ public class MainActivity extends AppCompatActivity
         } catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://twitter.com/#!/" + twitterName)));
         }
+    }
+
+    public void openWebpage(View view) {
+        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse((String) view.getTag())));
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OhioDevFest</string>
+    <string name="app_name">Ohio Dev Fest</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,7 +7,10 @@
     <string name="action_settings">Settings</string>
     <string name="usd">USD</string>
     <string name="intro">Ohio DevFest 2016 is a <b>100% community organized developer conference</b> with industry experts presenting on exciting topics including <b>mobile, web, cloud, virtual reality, machine learning, and more!</b> Ohio DevFest 2016 is scheduled for <b>November 19th, 2016</b> at the <b>University of Cincinnati</b>.</string>
-    <string name="code_of_conduct"><p><b>This “Don’t be a jerk” policy is a shortened, more casual version of the longer Code of Conduct policy. <a href="https://meta.wikimedia.org/wiki/Don%27t_be_a_jerk">Read full version.</a></b></p><p>The GDG communities organizing this event are open, respectful, and inclusive communities. That means jerky behavior isn’t allowed at GDG meetings or events. Because we know that it’s not obvious to everyone, here’s a reminder of the types of things we don’t allow: jokes or offensive comments about sex/sexuality/race/religion/nationality/age/disability/body size, showing porn in public, touching people uninvited, or continuing to interact with someone after they’ve asked you to stop. Continuous jerky behavior may result in getting expelled from the meeting, event, or GDG Chapter(s).</p><p>If someone is bothering you, please tell an organizer immediately and they will take care of it. We want to maintain GDG DevFest’s awesomeness.</p><p>Be excellent to each other.</p></string>
+    <string name="code_of_conduct_1"><b>This “Don’t be a jerk” policy is a shortened, more casual version of the longer Code of Conduct policy. <a href="https://meta.wikimedia.org/wiki/Don%27t_be_a_jerk">Read full version.</a></b></string>
+    <string name="code_of_conduct_2">The GDG communities organizing this event are open, respectful, and inclusive communities. That means jerky behavior isn’t allowed at GDG meetings or events. Because we know that it’s not obvious to everyone, here’s a reminder of the types of things we don’t allow: jokes or offensive comments about sex/sexuality/race/religion/nationality/age/disability/body size, showing porn in public, touching people uninvited, or continuing to interact with someone after they’ve asked you to stop. Continuous jerky behavior may result in getting expelled from the meeting, event, or GDG Chapter(s).</string>
+    <string name="code_of_conduct_3">If someone is bothering you, please tell an organizer immediately and they will take care of it. We want to maintain GDG DevFest’s awesomeness.</string>
+    <string name="code_of_conduct_4">Be excellent to each other.</string>
     <string name="featured_speakers">FEATURED SPEAKERS</string>
     <string name="view_all_speakers">VIEW ALL SPEAKERS</string>
     <string name="tickets">TICKETS</string>
@@ -52,4 +55,6 @@
     <string name="organizers">Organizers</string>
     <string name="gdg_cin_url">https://www.meetup.com/cincy-android/</string>
     <string name="gdg_col_url">https://www.meetup.com/GDG-Columbus/</string>
+    <string name="title_conduct">Code of Conduct</string>
+    <string name="jerk_url">https://meta.wikimedia.org/wiki/Don%27t_be_a_jerk</string>
 </resources>

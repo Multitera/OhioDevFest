@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:text="@string/title_conduct"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:text="@string/code_of_conduct_1"
+        android:onClick="openWebpage"
+        android:tag="@string/jerk_url"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="14dp"
+        android:paddingLeft="14dp"
+        android:paddingEnd="14dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="14dp"
+        android:text="@string/code_of_conduct_2"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="14dp"
+        android:paddingLeft="14dp"
+        android:paddingEnd="14dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="14dp"
+        android:text="@string/code_of_conduct_3"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="14dp"
+        android:paddingLeft="14dp"
+        android:paddingEnd="14dp"
+        android:paddingRight="14dp"
+        android:paddingBottom="14dp"
+        android:text="@string/code_of_conduct_4"
+        android:onClick="beExcellent"/>
+
+</LinearLayout>

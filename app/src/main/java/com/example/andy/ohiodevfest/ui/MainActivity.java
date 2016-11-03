@@ -2,6 +2,7 @@ package com.example.andy.ohiodevfest.ui;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -21,6 +22,7 @@ import com.example.andy.ohiodevfest.Model;
 import com.example.andy.ohiodevfest.R;
 import com.example.andy.ohiodevfest.model.Session;
 import com.example.andy.ohiodevfest.model.Speaker;
+import com.example.andy.ohiodevfest.ui.fragment.ConductFragment;
 import com.example.andy.ohiodevfest.ui.fragment.HomeFragment;
 import com.example.andy.ohiodevfest.ui.fragment.PartnersFragment;
 import com.example.andy.ohiodevfest.ui.fragment.SpeakerListFragment;
@@ -123,6 +125,10 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
         } else if (id == R.id.nav_conduct) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ConductFragment(), FragmentTags.CONDUCT.toString())
+                    .commit();
 
         }
 
@@ -202,5 +208,9 @@ public class MainActivity extends AppCompatActivity
 
     public void openWebpage(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse((String) view.getTag())));
+    }
+
+    public void beExcellent(View view) {
+        MediaPlayer.create(getApplicationContext(), R.raw.be_excellent).start();
     }
 }

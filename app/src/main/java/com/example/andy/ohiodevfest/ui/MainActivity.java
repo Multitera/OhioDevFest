@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Presenter presenter = new Presenter(this, Model.getInstance());
+    SwipeRefreshLayout swipeRefreshLayout;
     private final String SPEAKER_KEY = "speaker";
     private enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
     private FragmentTags currentFragment;
@@ -54,6 +56,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            presenter.refreshData();
+        });
 
         if (savedInstanceState == null) {
             getSupportFragmentManager()
@@ -145,15 +152,14 @@ public class MainActivity extends AppCompatActivity
 
     private void refreshFragment(Fragment fragment) {
         FragmentTags fragmentTag = FragmentTags.valueOf(fragment.getTag());
+        currentFragment = fragmentTag;
 
         //#enumsMatter
         switch (fragmentTag) {
             case HOME:
-                currentFragment = fragmentTag;
                 presenter.getSpeakers(true, null);
                 break;
             case SPEAKERS:
-                currentFragment = fragmentTag;
                 presenter.getSpeakers(true, null);
                 break;
         }
@@ -173,6 +179,10 @@ public class MainActivity extends AppCompatActivity
     public void pushSessions (List<Session> sessions) {
         switch (currentFragment) {
         }
+    }
+
+    public void refreshFinished () {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     public void openSpeaker(View view) {

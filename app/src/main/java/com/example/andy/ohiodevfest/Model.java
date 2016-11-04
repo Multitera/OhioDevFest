@@ -8,17 +8,18 @@ import com.example.andy.ohiodevfest.utils.GsonHelper;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmAsyncTask;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by andy on 10/26/16.
@@ -29,6 +30,9 @@ public class Model implements Closeable{
     private final Realm realm;
     private static Model instance = null;
     private OhioDevFestService festService;
+    private RealmAsyncTask scheduleTask;
+    private RealmAsyncTask sessionsTask;
+    private RealmAsyncTask speakersTask;
 
     public static synchronized Model getInstance() {
         if (instance == null) {
@@ -47,36 +51,34 @@ public class Model implements Closeable{
         festService = retrofit.create(OhioDevFestService.class);
     }
 
-    public Subscription downloadSchedulesFromNetwork() {
+    public void insertSchedule (List<Schedule> list) {
+        scheduleTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm.insertOrUpdate(list));
+    }
+
+    public Observable downloadSchedulesFromNetwork() {
         return festService.schedule()
                 .subscribeOn(Schedulers.io())
-                .subscribe(list -> {
-                    Realm.getDefaultInstance().executeTransaction(realm -> realm.insertOrUpdate(list));
-                });
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Subscription downloadSpeakersFromNetwork() {
+    public void insertSpeakers (List<Speaker> list) {
+        speakersTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm.insertOrUpdate(list));
+    }
+
+    public Observable downloadSpeakersFromNetwork() {
         return festService.speakers()
                 .subscribeOn(Schedulers.io())
-                .subscribe(list -> {
-                    Realm.getDefaultInstance().executeTransaction(realm -> realm.insertOrUpdate(list));
-                });
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Subscription downloadSessionsFromNetwork() {
+    public void insertSessions (List<Session> list) {
+        sessionsTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm.insertOrUpdate(list));
+    }
+
+    public Observable downloadSessionsFromNetwork() {
         return festService.sessions()
                 .subscribeOn(Schedulers.io())
-                .subscribe(list -> {
-                    Realm.getDefaultInstance().executeTransaction(realm -> realm.insertOrUpdate(list));
-                });
-    }
-
-    public CompositeSubscription updateData (){
-        CompositeSubscription subscriptions = new CompositeSubscription();
-        subscriptions.add(downloadSchedulesFromNetwork());
-        subscriptions.add(downloadSessionsFromNetwork());
-        subscriptions.add(downloadSpeakersFromNetwork());
-        return subscriptions;
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Observable<RealmObject> findSchedule(String date){
@@ -128,6 +130,9 @@ public class Model implements Closeable{
 
     @Override
     public void close() throws IOException {
+        scheduleTask.cancel();
+        sessionsTask.cancel();
+        speakersTask.cancel();
         realm.close();
     }
 }

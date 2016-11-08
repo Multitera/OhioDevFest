@@ -5,6 +5,7 @@ import com.limerobotsoftware.ohiodevfest.realm.RealmString;
 
 import org.parceler.Parcel;
 import org.parceler.ParcelPropertyConverter;
+import org.parceler.Transient;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -37,7 +38,7 @@ public class Speaker  extends RealmObject {
         return sessionList;
     }
 
-    @ParcelPropertyConverter(RealmListParcelConverter.class)
+    @Transient
     public void setSessionList(RealmList<Session> sessionList) {
         this.sessionList = sessionList;
     }

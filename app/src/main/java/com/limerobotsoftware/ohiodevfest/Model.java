@@ -13,7 +13,6 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmAsyncTask;
-import io.realm.RealmObject;
 import io.realm.RealmResults;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -82,11 +81,12 @@ public class Model implements Closeable{
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<RealmObject> findSchedule(String date){
+    public Observable<RealmResults<Schedule>> findSchedule(String date){
         return realm.where(Schedule.class)
                 .equalTo("date", date)
-                .findFirstAsync()
-                .asObservable().filter(Schedule::isLoaded);
+                .findAllAsync()
+                .asObservable()
+                .filter(RealmResults::isLoaded);
     }
 
     public Observable<RealmResults<Session>> findSessions(Integer[] ids){

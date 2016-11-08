@@ -21,11 +21,13 @@ import android.view.View;
 
 import com.limerobotsoftware.ohiodevfest.Model;
 import com.limerobotsoftware.ohiodevfest.R;
-import com.limerobotsoftware.ohiodevfest.model.Session;
+import com.limerobotsoftware.ohiodevfest.model.Schedule;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
+import com.limerobotsoftware.ohiodevfest.model.Timeslot;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.ConductFragment;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.HomeFragment;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.PartnersFragment;
+import com.limerobotsoftware.ohiodevfest.ui.fragment.ScheduleFragment;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.SpeakerListFragment;
 
 import org.parceler.Parcels;
@@ -119,6 +121,10 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.fragment_container, new HomeFragment(), FragmentTags.HOME.toString())
                     .commit();
         } else if (id == R.id.nav_schedule) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ScheduleFragment(), FragmentTags.SCHEDULE.toString())
+                    .commit();
 
         } else if (id == R.id.nav_speakers) {
             getSupportFragmentManager()
@@ -162,6 +168,9 @@ public class MainActivity extends AppCompatActivity
             case SPEAKERS:
                 presenter.getSpeakers(true, null);
                 break;
+            case SCHEDULE:
+                presenter.getSchedule("2016-11-19");
+                break;
         }
     }
 
@@ -176,8 +185,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void pushSessions (List<Session> sessions) {
+    public void pushSchedule (List<Schedule> schedules) {
         switch (currentFragment) {
+            case SCHEDULE:
+                List<Timeslot> timeslots = schedules.get(0).getTimeslots();
+                ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateTimeslots(timeslots);
+                break;
         }
     }
 

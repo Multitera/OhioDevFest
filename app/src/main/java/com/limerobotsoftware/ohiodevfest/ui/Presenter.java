@@ -60,10 +60,10 @@ public class Presenter {
         viewSubscriptions.add(model.findSpeakers(featured, ids).subscribe(view::pushSpeakers));
     }
 
-    public void getSessions(Integer[] ids) {
+    public void getSchedule(String date) {
         if (viewSubscriptions.hasSubscriptions())
             viewSubscriptions.clear();
-        viewSubscriptions.add(model.findSessions(ids).subscribe(view::pushSessions));
+        viewSubscriptions.add(model.findSchedule(date).subscribe(view::pushSchedule));
     }
 
     public void onPause() {

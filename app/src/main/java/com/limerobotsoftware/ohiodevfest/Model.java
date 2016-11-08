@@ -3,6 +3,7 @@ package com.limerobotsoftware.ohiodevfest;
 import com.limerobotsoftware.ohiodevfest.model.Schedule;
 import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
+import com.limerobotsoftware.ohiodevfest.model.Timeslot;
 import com.limerobotsoftware.ohiodevfest.service.OhioDevFestService;
 import com.limerobotsoftware.ohiodevfest.utils.GsonHelper;
 
@@ -120,6 +121,35 @@ public class Model implements Closeable{
                 .findAllAsync()
                 .asObservable()
                 .filter(RealmResults::isLoaded);
+    }
+
+    public void addSessionsToTimeSlots() {
+        realm.executeTransactionAsync(realm -> {
+            List<Timeslot> timeSlots = realm.copyToRealmOrUpdate(realm.where(Timeslot.class).findAll());
+            for(Timeslot timeslot : timeSlots) {
+                for (int i=0; i < timeslot.getSessions().size(); i++) {
+                    int val = timeslot.getSessions().get(i).getVal().get(0).getVal();
+                    timeslot.getSessionList()
+                            .add(realm.where(Session.class)
+                                    .equalTo("id", val)
+                                    .findFirst());
+                }
+            }
+        });
+    }
+
+    public void addSessionSpeakerRelationships() {
+        realm.executeTransactionAsync(realm -> {
+            List<Session> sessions = realm.copyToRealmOrUpdate(realm.where(Session.class).findAll());
+            for(Session session : sessions) {
+                if (session.getSpeakers().size() > 0) {
+                    int val = session.getSpeakers().get(0).getVal();
+                    Speaker speaker = realm.copyToRealmOrUpdate(realm.where(Speaker.class).equalTo("id", val).findFirst());
+                    speaker.getSessionList().add(session);
+                    session.getSpeakerList().add(speaker);
+                }
+            }
+        });
     }
 
     @Override

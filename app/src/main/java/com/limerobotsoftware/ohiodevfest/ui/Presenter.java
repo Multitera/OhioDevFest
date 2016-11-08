@@ -72,7 +72,10 @@ public class Presenter {
     }
 
     public void checkAllFinished() {
-        if (scheduleFinished&&sessionFinished&&speakerFinished)
+        if (scheduleFinished&&sessionFinished&&speakerFinished) {
             view.refreshFinished();
+            model.addSessionSpeakerRelationships();
+            model.addSessionsToTimeSlots();
+        }
     }
 }

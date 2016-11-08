@@ -31,6 +31,16 @@ public class Speaker  extends RealmObject {
     private String bio;
     private RealmList<RealmString> tags;
     private RealmList<Social> socials;
+    private RealmList<Session> sessionList;
+
+    public RealmList<Session> getSessionList() {
+        return sessionList;
+    }
+
+    @ParcelPropertyConverter(RealmListParcelConverter.class)
+    public void setSessionList(RealmList<Session> sessionList) {
+        this.sessionList = sessionList;
+    }
 
     public int getId() {
         return id;

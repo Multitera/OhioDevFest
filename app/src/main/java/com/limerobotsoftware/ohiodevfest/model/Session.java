@@ -31,6 +31,16 @@ public class Session  extends RealmObject {
     private String videoId;
     private RealmList<RealmInt> speakers;
     private RealmList<RealmString> tags;
+    private RealmList<Speaker> speakerList;
+
+    public RealmList<Speaker> getSpeakerList() {
+        return speakerList;
+    }
+
+    @ParcelPropertyConverter(RealmListParcelConverter.class)
+    public void setSpeakerList(RealmList<Speaker> speakerList) {
+        this.speakerList = speakerList;
+    }
 
     public int getId() {
         return id;

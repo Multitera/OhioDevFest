@@ -21,6 +21,16 @@ public class Timeslot  extends RealmObject {
     private String startTime;
     private String endTime;
     private RealmList<RealmIntList> sessions;
+    private RealmList<Session> sessionList;
+
+    public RealmList<Session> getSessionList() {
+        return sessionList;
+    }
+
+    @ParcelPropertyConverter(RealmListParcelConverter.class)
+    public void setSessionList(RealmList<Session> sessionList) {
+        this.sessionList = sessionList;
+    }
 
     public String getStartTime() {
         return startTime;

@@ -213,5 +213,7 @@
         android:backgroundTint="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="openWebpage"
+        android:tag="@string/eventbrite_url"
         android:layout_marginBottom="@dimen/nav_header_vertical_spacing"/>
 </LinearLayout>

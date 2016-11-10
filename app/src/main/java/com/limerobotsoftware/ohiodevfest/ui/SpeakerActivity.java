@@ -11,11 +11,12 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.limerobotsoftware.ohiodevfest.R;
+import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.SpeakerFragment;
 import com.squareup.picasso.Picasso;
 
-import org.parceler.Parcels;
+import static org.parceler.Parcels.unwrap;
 
 /**
  * Created by andy on 11/2/16.
@@ -24,14 +25,17 @@ import org.parceler.Parcels;
 public class SpeakerActivity extends AppCompatActivity {
 
     private final String SPEAKER_KEY = "speaker";
+    private final String SESSION_KEY = "session";
     private Speaker speaker;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speaker);
 
-        speaker = Parcels.unwrap(getIntent().getParcelableExtra(SPEAKER_KEY));
+        speaker = unwrap(getIntent().getParcelableExtra(SPEAKER_KEY));
+        session = unwrap(getIntent().getParcelableExtra(SESSION_KEY));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(speaker.getName());
 
@@ -53,6 +57,7 @@ public class SpeakerActivity extends AppCompatActivity {
         if (fragment.getTag().equals(SPEAKER_KEY)) {
             SpeakerFragment speakerFragment = (SpeakerFragment) fragment;
             speakerFragment.setSpeaker(speaker);
+            speakerFragment.setSession(session);
         }
     }
 

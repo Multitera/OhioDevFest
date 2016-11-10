@@ -22,6 +22,7 @@ import android.view.View;
 import com.limerobotsoftware.ohiodevfest.Model;
 import com.limerobotsoftware.ohiodevfest.R;
 import com.limerobotsoftware.ohiodevfest.model.Schedule;
+import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
 import com.limerobotsoftware.ohiodevfest.model.Timeslot;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.ConductFragment;
@@ -34,12 +35,15 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
+import io.realm.RealmList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     com.limerobotsoftware.ohiodevfest.ui.Presenter presenter = new com.limerobotsoftware.ohiodevfest.ui.Presenter(this, Model.getInstance());
     SwipeRefreshLayout swipeRefreshLayout;
     private final String SPEAKER_KEY = "speaker";
+    private final String SESSION_KEY = "session";
     private enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
     private FragmentTags currentFragment;
 
@@ -200,8 +204,12 @@ public class MainActivity extends AppCompatActivity
 
     public void openSpeaker(View view) {
         Intent intent = new Intent(this, com.limerobotsoftware.ohiodevfest.ui.SpeakerActivity.class);
-        Parcelable parcelable = Parcels.wrap(view.getTag());
-        intent.putExtra(SPEAKER_KEY, parcelable);
+        Speaker speaker = (Speaker) view.getTag();
+        Parcelable parcelableSpeaker = Parcels.wrap(speaker);
+        intent.putExtra(SPEAKER_KEY, parcelableSpeaker);
+        RealmList<Session> sessionList = speaker.getSessionList();
+        Parcelable parcelableSession = Parcels.wrap(sessionList.get(0));
+        intent.putExtra(SESSION_KEY, parcelableSession);
         TaskStackBuilder.create(this)
                 .addNextIntentWithParentStack(intent)
                 .startActivities();

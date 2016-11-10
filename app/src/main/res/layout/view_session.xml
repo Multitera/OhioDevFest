@@ -21,11 +21,4 @@
         android:padding="10dp"
         tools:text="Every day brings a new story or movie about how the future will be ruled by Artificial Intelligence.  How far are we away from discovering Skynet anyway? This talk will take us on a mini adventure in AI and machine learn..."/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/read_more"
-        android:textStyle="normal|bold" />
-
 </LinearLayout>

@@ -4,7 +4,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,6 @@ import com.limerobotsoftware.ohiodevfest.R;
 import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Social;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
-import com.limerobotsoftware.ohiodevfest.ui.adapter.SessionViewAdapter;
-
-import java.util.List;
 
 /**
  * Created by andy on 10/31/16.
@@ -27,11 +23,12 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
 
     TextView company;
     TextView bio;
+    TextView title;
+    TextView description;
     ImageView twitter;
     ImageView gPlus;
-    private RecyclerView recyclerView;
-    private SessionViewAdapter adapter;
     private Speaker speaker;
+    private Session session;
 
     @Nullable
     @Override
@@ -42,7 +39,8 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
         bio = (TextView) view.findViewById(R.id.bio);
         twitter = (ImageView) view.findViewById(R.id.twitter);
         gPlus = (ImageView) view.findViewById(R.id.g_plus);
-        recyclerView = (RecyclerView) view.findViewById(R.id.sessions);
+        title = (TextView) view.findViewById(R.id.title);
+        description = (TextView) view.findViewById(R.id.description);
 
         return view;
     }
@@ -52,6 +50,8 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
         super.onViewCreated(view, savedInstanceState);
         company.setText(speaker.getCompany());
         bio.setText(speaker.getBio());
+        title.setText(session.getTitle());
+        description.setText(session.getDescription());
         Resources resources = getContext().getResources();
 
         for (Social social : speaker.getSocials()) {
@@ -63,23 +63,11 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
                 gPlus.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_google_plus_box, null));
             }
         }
-
-        recyclerView.setNestedScrollingEnabled(false);
-        if (recyclerView.getAdapter() == null && adapter != null)
-            recyclerView.setAdapter(adapter);
     }
 
     public void setSpeaker(Speaker speaker) {
         this.speaker = speaker;
     }
 
-    public void populateSessions(List<Session> sessions) {
-        if(adapter == null) {
-            adapter = new SessionViewAdapter();
-            recyclerView.setAdapter(adapter);
-        }
-        adapter.setSessions(sessions);
-        adapter.notifyDataSetChanged();
-        recyclerView.invalidate();
-    }
+    public void setSession(Session session) { this.session = session; }
 }

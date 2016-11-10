@@ -59,9 +59,5 @@
         android:textStyle="normal|bold"
         android:textAllCaps="false" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/sessions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"/>
+    <include layout="@layout/view_session" />
 </LinearLayout>

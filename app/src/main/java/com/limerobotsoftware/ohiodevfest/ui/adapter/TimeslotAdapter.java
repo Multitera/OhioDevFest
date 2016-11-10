@@ -57,6 +57,8 @@ public class TimeslotAdapter extends RecyclerView.Adapter<TimeslotAdapter.ViewHo
 
                 if (session.getSpeakerList().size() > 0) {
                     Speaker speaker = session.getSpeakerList().get(0);
+                    sessionCard.setTag(speaker);
+                    sessionCard.setClickable(true);
                     ImageView photo = (ImageView) view.findViewById(R.id.photo);
                     TextView name = (TextView) view.findViewById(R.id.name);
                     TextView company = (TextView) view.findViewById(R.id.company);
@@ -67,6 +69,7 @@ public class TimeslotAdapter extends RecyclerView.Adapter<TimeslotAdapter.ViewHo
                             .into(photo);
                 } else {
                     photoCircle.setVisibility(View.GONE);
+                    sessionCard.setClickable(false);
                 }
 
                 title.setText(session.getTitle());

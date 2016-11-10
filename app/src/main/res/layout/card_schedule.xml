@@ -9,6 +9,7 @@
         android:id="@+id/session_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="openSpeaker"
         android:padding="20dp"
         app:cardElevation="24dp">
         <LinearLayout

@@ -58,4 +58,6 @@
     <string name="title_conduct">Code of Conduct</string>
     <string name="jerk_url">https://meta.wikimedia.org/wiki/Don%27t_be_a_jerk</string>
     <string name="eventbrite_url">https://www.eventbrite.com/e/ohio-devfest-tickets-25964520580</string>
+    <string name="attend">Attend</string>
+    <string name="attending">Attending</string>
 </resources>

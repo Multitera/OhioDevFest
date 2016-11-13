@@ -202,6 +202,11 @@ public class MainActivity extends AppCompatActivity
         swipeRefreshLayout.setRefreshing(false);
     }
 
+    public void attendingChange (View view) {
+        Session session = (Session) view.getTag();
+        presenter.updateAttending(session.getId());
+    }
+
     public void openSpeaker(View view) {
         Intent intent = new Intent(this, com.limerobotsoftware.ohiodevfest.ui.SpeakerActivity.class);
         Speaker speaker = (Speaker) view.getTag();

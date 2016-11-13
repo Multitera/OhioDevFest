@@ -103,10 +103,27 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:paddingEnd="10dp"
                     tools:text="Track 1"
                     android:id="@+id/track"
                     android:textSize="14sp"
                     android:textColor="?attr/colorButtonNormal" />
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_menu_schedule"
+                    android:id="@+id/ic_attending"
+                    android:tint="?attr/colorButtonNormal"
+                    android:onClick="attendingChange"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/attend"
+                    android:id="@+id/attending"
+                    android:textSize="14sp"
+                    android:textColor="?attr/colorButtonNormal"
+                    android:onClick="attendingChange" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -1,6 +1,8 @@
 package com.limerobotsoftware.ohiodevfest.ui.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -54,6 +56,17 @@ public class TimeslotAdapter extends RecyclerView.Adapter<TimeslotAdapter.ViewHo
                 TextView endTime = (TextView) view.findViewById(R.id.end_time);
                 TextView track = (TextView) view.findViewById(R.id.track);
                 CardView photoCircle = (CardView) view.findViewById(R.id.photo_circle);
+                TextView attending = (TextView) view.findViewById(R.id.attending);
+                ImageView icAttending = (ImageView) view.findViewById(R.id.ic_attending);
+
+                attending.setTag(session);
+                icAttending.setTag(session);
+                if (session.getAttending() != null && session.getAttending()) {
+                    icAttending.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_event_attending));
+                    DrawableCompat.setTint(icAttending.getDrawable(), ContextCompat.getColor(context, R.color.colorAccent));
+                    attending.setText(context.getResources().getText(R.string.attending));
+                    attending.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+                }
 
                 if (session.getSpeakerList().size() > 0) {
                     Speaker speaker = session.getSpeakerList().get(0);

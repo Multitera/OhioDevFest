@@ -1,5 +1,6 @@
 package com.limerobotsoftware.ohiodevfest;
 
+import com.google.gson.Gson;
 import com.limerobotsoftware.ohiodevfest.model.Schedule;
 import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
@@ -52,7 +53,8 @@ public class Model implements Closeable{
     }
 
     public void insertSchedule (List<Schedule> list) {
-        scheduleTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm.insertOrUpdate(list));
+        scheduleTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm
+                .createOrUpdateAllFromJson(Schedule.class, new Gson().toJson(list)));
     }
 
     public Observable downloadSchedulesFromNetwork() {
@@ -62,7 +64,8 @@ public class Model implements Closeable{
     }
 
     public void insertSpeakers (List<Speaker> list) {
-        speakersTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm.insertOrUpdate(list));
+        speakersTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm
+                .createOrUpdateAllFromJson(Speaker.class,  new Gson().toJson(list)));
     }
 
     public Observable downloadSpeakersFromNetwork() {
@@ -72,7 +75,8 @@ public class Model implements Closeable{
     }
 
     public void insertSessions (List<Session> list) {
-        sessionsTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm.insertOrUpdate(list));
+        sessionsTask = Realm.getDefaultInstance().executeTransactionAsync(realm -> realm
+                .createOrUpdateAllFromJson(Session.class, new Gson().toJson(list)));
     }
 
     public Observable downloadSessionsFromNetwork() {
@@ -121,6 +125,16 @@ public class Model implements Closeable{
                 .findAllAsync()
                 .asObservable()
                 .filter(RealmResults::isLoaded);
+    }
+
+    public void toggleAttending(Integer id) {
+        realm.executeTransactionAsync(realm -> {
+            Session session = realm.copyToRealmOrUpdate(realm.where(Session.class).equalTo("id", id).findFirst());
+            if (session.getAttending() == null)
+                session.setAttending(true);
+            else
+            session.setAttending(!session.getAttending());
+        });
     }
 
     public void addSessionsToTimeSlots() {

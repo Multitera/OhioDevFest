@@ -23,6 +23,7 @@ public class Session  extends RealmObject {
 
     @PrimaryKey
     private int id;
+    private Boolean isAttending;
     private String title;
     private String description;
     private String language;
@@ -123,5 +124,13 @@ public class Session  extends RealmObject {
     @ParcelPropertyConverter(RealmListParcelConverter.class)
     public void setTags(RealmList<RealmString> tags) {
         this.tags = tags;
+    }
+
+    public Boolean getAttending() {
+        return isAttending;
+    }
+
+    public void setAttending(Boolean attending) {
+        isAttending = attending;
     }
 }

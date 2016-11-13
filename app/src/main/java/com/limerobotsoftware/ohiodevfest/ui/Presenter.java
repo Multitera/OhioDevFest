@@ -66,6 +66,10 @@ public class Presenter {
         viewSubscriptions.add(model.findSchedule(date).subscribe(view::pushSchedule));
     }
 
+    public void updateAttending(Integer id) {
+        model.toggleAttending(id);
+    }
+
     public void onPause() {
         modelSubscriptions.unsubscribe();
         viewSubscriptions.unsubscribe();

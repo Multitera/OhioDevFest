@@ -1,107 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:test="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/speaker_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="20dp">
-    <android.support.v7.widget.CardView
-        android:id="@+id/speaker_card"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:onClick="openSpeaker">
+    android:layout_gravity="center"
+    android:layout_margin="16dp"
+    android:onClick="openSpeaker">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_marginTop="16dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp">
+
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:transitionName="@string/transition_name_photo"
+                tools:background="@drawable/jake_wharton" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/photo_shade" />
+
+            <TextView
+                android:id="@+id/company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                tools:text="Square" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/company"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                tools:text="Jake Wharton" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textSize="18sp"
+            tools:text="Jake Wharton is an Android developer at Square working on Square Cash. He has been living with a severe allergy to boilerplate code and bad APIs for years and speaks at conferences all around the world in an effort to ed..." />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#90909090"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="280dp">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/photo"
-                    android:transitionName="@string/transition_name_photo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    test:background="@drawable/jake_wharton" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/photo_shade"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingStart="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:gravity="bottom"
-                    android:layout_weight="1"
-                    test:text="Jake Wharton"
-                    android:textColor="@android:color/white"
-                    android:textSize="24sp" />
-
-                <TextView
-                    android:id="@+id/company"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:layout_weight="0"
-                    test:text="Square"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp" />
-                </LinearLayout>
-            </RelativeLayout>
-            <TextView
-                android:id="@+id/bio"
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/twitter"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                test:text="Jake Wharton is an Android developer at Square working on Square Cash. He has been living with a severe allergy to boilerplate code and bad APIs for years and speaks at conferences all around the world in an effort to ed..."
-                android:textSize="18sp"/>
-            <View
-                android:layout_height="1dp"
-                android:layout_width="match_parent"
-                android:background="#90909090"
-                android:layout_marginTop="10dp"
-                />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="34dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/twitter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:tint="@color/grey_icon"
-                    android:onClick="openTwitter"
-                    test:src="@drawable/ic_twitter_box" />
-                <ImageView
-                    android:id="@+id/g_plus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:tint="@color/grey_icon"
-                    android:onClick="openGPlus"
-                    test:src="@drawable/ic_google_plus_box"/>
-            </LinearLayout>
+                android:onClick="openTwitter"
+                android:padding="8dp"
+                android:tint="@color/grey_icon"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_twitter_box"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
+            <ImageButton
+                android:id="@+id/g_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openGPlus"
+                android:padding="8dp"
+                android:background="@android:color/transparent"
+                android:tint="@color/grey_icon"
+                android:src="@drawable/ic_google_plus_box"
+                android:visibility="gone"
+                tools:visibility="visible"/>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
 
-</LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

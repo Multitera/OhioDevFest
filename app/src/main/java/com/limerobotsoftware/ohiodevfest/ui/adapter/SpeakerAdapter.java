@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,15 +56,18 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.ViewHold
                     .load("https://ohiodevfest.com"+speaker.getPhotoUrl())
                     .into(holder.photo);
 
-            holder.gPlus.setImageDrawable(null);
-            holder.twitter.setImageDrawable(null);
+            holder.twitter.setVisibility(View.GONE);
+            holder.gPlus.setVisibility(View.GONE);
             for (Social social : speaker.getSocials()) {
                 if (social.getName().equals("Twitter")) {
                     holder.twitter.setTag(social.getLink().substring(resources.getInteger(R.integer.twitterStart), social.getLink().length()-1));
-                    holder.twitter.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_twitter_box, null));
+                    holder.twitter.setVisibility(View.VISIBLE);
+                    holder.divider.setVisibility(View.VISIBLE);
+
                 } else if (social.getName().equals("Google+")) {
                     holder.gPlus.setTag(social.getLink().substring(resources.getInteger(R.integer.gPlusStart)));
-                    holder.gPlus.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_google_plus_box, null));
+                    holder.gPlus.setVisibility(View.VISIBLE);
+                    holder.divider.setVisibility(View.VISIBLE);
                 }
             }
         }
@@ -89,8 +93,9 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.ViewHold
         TextView company;
         TextView bio;
         ImageView photo;
-        ImageView twitter;
-        ImageView gPlus;
+        ImageButton twitter;
+        ImageButton gPlus;
+        View divider;
 
         public ViewHolder(View itemView) {
 
@@ -100,8 +105,9 @@ public class SpeakerAdapter extends RecyclerView.Adapter<SpeakerAdapter.ViewHold
             company = (TextView) itemView.findViewById(R.id.company);
             photo = (ImageView) itemView.findViewById(R.id.photo);
             bio = (TextView) itemView.findViewById(R.id.bio);
-            twitter = (ImageView) itemView.findViewById(R.id.twitter);
-            gPlus = (ImageView) itemView.findViewById(R.id.g_plus);
+            twitter = (ImageButton) itemView.findViewById(R.id.twitter);
+            gPlus = (ImageButton) itemView.findViewById(R.id.g_plus);
+            divider = itemView.findViewById(R.id.divider);
         }
     }
 }

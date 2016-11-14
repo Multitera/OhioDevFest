@@ -47,9 +47,7 @@ public class TimeslotAdapter extends RecyclerView.Adapter<TimeslotAdapter.ViewHo
             holder.cardHolder.removeAllViews();
             int trackNumber = 0;
             for(Session session: timeslot.getSessionList()){
-                View view = LayoutInflater.from(context).inflate(R.layout.card_schedule, null, false);
-
-                DisplayMetrics metrics = new DisplayMetrics();
+                View view = LayoutInflater.from(context).inflate(R.layout.card_schedule, holder.cardHolder, false);
 
                 CardView sessionCard = (CardView) view.findViewById(R.id.session_card);
                 TextView title = (TextView) view.findViewById(R.id.title);
@@ -81,6 +79,10 @@ public class TimeslotAdapter extends RecyclerView.Adapter<TimeslotAdapter.ViewHo
                             .load("https://ohiodevfest.com"+ speaker.getPhotoUrl())
                             .into(photo);
                 } else {
+                    TextView name = (TextView) view.findViewById(R.id.name);
+                    TextView company = (TextView) view.findViewById(R.id.company);
+                    name.setVisibility(View.GONE);
+                    company.setVisibility(View.GONE);
                     photoCircle.setVisibility(View.GONE);
                     sessionCard.setClickable(false);
                 }

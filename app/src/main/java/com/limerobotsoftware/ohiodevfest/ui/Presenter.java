@@ -47,7 +47,7 @@ public class Presenter {
 
             @Override
             public void onError(Throwable e) {
-                refreshFailed();
+                refreshFailed(e.getLocalizedMessage());
             }
 
             @Override
@@ -64,7 +64,7 @@ public class Presenter {
 
             @Override
             public void onError(Throwable e) {
-                refreshFailed();
+                refreshFailed(e.getLocalizedMessage());
             }
 
             @Override
@@ -81,7 +81,7 @@ public class Presenter {
 
             @Override
             public void onError(Throwable e) {
-                refreshFailed();
+                refreshFailed(e.getLocalizedMessage());
             }
 
             @Override
@@ -120,8 +120,8 @@ public class Presenter {
         }
     }
 
-    private void refreshFailed() {
+    private void refreshFailed(String localizedMessage) {
         modelSubscriptions.clear();
-        view.retrofitFailed();
+        view.retrofitFailed(localizedMessage);
     }
 }

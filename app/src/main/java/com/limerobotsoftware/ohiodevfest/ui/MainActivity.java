@@ -76,6 +76,9 @@ public class MainActivity extends AppCompatActivity
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(() -> {
+            Bundle payload = new Bundle();
+            payload.putString(FirebaseAnalytics.Param.VALUE, "refresh swiped");
+            firebaseAnalytics.logEvent("serviceEvents", payload);
             presenter.refreshData();
         });
 
@@ -182,6 +185,10 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, tag);
+        firebaseAnalytics.logEvent("fragmentViewed", payload);
+
         return fragment;
     }
 
@@ -233,7 +240,10 @@ public class MainActivity extends AppCompatActivity
         swipeRefreshLayout.setRefreshing(false);
     }
 
-    public void retrofitFailed() {
+    public void retrofitFailed(String error) {
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, error);
+        firebaseAnalytics.logEvent("serviceEvents", payload);
         refreshFinished();
         Snackbar snackbar = Snackbar
                 .make(coordinatorLayout, "Failed to load data", Snackbar.LENGTH_INDEFINITE)
@@ -269,6 +279,9 @@ public class MainActivity extends AppCompatActivity
         RealmList<Session> sessionList = speaker.getSessionList();
         Parcelable parcelableSession = Parcels.wrap(sessionList.get(0));
         intent.putExtra(SESSION_KEY, parcelableSession);
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, speaker.getName());
+        firebaseAnalytics.logEvent("speakerViewed", payload);
         TaskStackBuilder.create(this)
                 .addNextIntentWithParentStack(intent)
                 .startActivities();
@@ -276,6 +289,9 @@ public class MainActivity extends AppCompatActivity
 
     public void openGPlus(View view) {
         String profile = (String) view.getTag();
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, profile);
+        firebaseAnalytics.logEvent("gplusViewed", payload);
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setClassName("com.google.android.apps.plus",
@@ -289,6 +305,9 @@ public class MainActivity extends AppCompatActivity
 
     public void openTwitter(View view) {
         String twitterName = (String) view.getTag();
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, twitterName);
+        firebaseAnalytics.logEvent("twitterViewed", payload);
         try {
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("twitter://user?screen_name=" + twitterName)));
         } catch (ActivityNotFoundException e) {
@@ -297,10 +316,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void openWebpage(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse((String) view.getTag())));
+        String tag = (String) view.getTag();
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, tag);
+        firebaseAnalytics.logEvent("webpageViewed", payload);
+        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(tag)));
     }
 
     public void beExcellent(View view) {
         MediaPlayer.create(getApplicationContext(), R.raw.be_excellent).start();
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, "excellent!");
+        firebaseAnalytics.logEvent("easterEgg", payload);
     }
 }

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.limerobotsoftware.ohiodevfest.R;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.SpeakerFragment;
@@ -22,12 +23,14 @@ import static org.parceler.Parcels.unwrap;
 
 public class SpeakerActivity extends AppCompatActivity {
 
+    private FirebaseAnalytics firebaseAnalytics;
     public final static String SPEAKER_KEY = "speaker";
     public final static String SESSION_KEY = "session";
     private final static String SPEAKER_FRAGMENT_TAG = "SpeakerFragmentTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speaker);
 
@@ -62,6 +65,9 @@ public class SpeakerActivity extends AppCompatActivity {
 
     public void openGPlus(View view) {
         String profile = (String) view.getTag();
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, profile);
+        firebaseAnalytics.logEvent("gplusViewed", payload);
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setClassName("com.google.android.apps.plus",
@@ -75,6 +81,9 @@ public class SpeakerActivity extends AppCompatActivity {
 
     public void openTwitter(View view) {
         String twitterName = (String) view.getTag();
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, twitterName);
+        firebaseAnalytics.logEvent("twitterViewed", payload);
         try {
             startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("twitter://user?screen_name=" + twitterName)));
         } catch (ActivityNotFoundException e) {

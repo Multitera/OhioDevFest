@@ -22,13 +22,6 @@
         android:id="@+id/empty_speakers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/featured_foot"
-        android:text="@string/view_all_speakers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/activity_vertical_margin"
-        android:layout_gravity="center"/>
 
     <include layout="@layout/home_prices" />
 

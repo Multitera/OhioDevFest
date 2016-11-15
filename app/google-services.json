@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "745872052123",
+    "firebase_url": "https://ohio-devfest.firebaseio.com",
+    "project_id": "ohio-devfest",
+    "storage_bucket": "ohio-devfest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745872052123:android:9e019eb9ed92f2be",
+        "android_client_info": {
+          "package_name": "com.limerobotsoftware.ohiodevfest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745872052123-bkjrotlpv2i2cjdl7394mte5bk413ee0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoBzg6pkFxaR8x86s4dqkycdqlNUEy1qs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

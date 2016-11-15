@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.limerobotsoftware.ohiodevfest.Model;
 import com.limerobotsoftware.ohiodevfest.R;
 import com.limerobotsoftware.ohiodevfest.model.Schedule;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity
     com.limerobotsoftware.ohiodevfest.ui.Presenter presenter = new com.limerobotsoftware.ohiodevfest.ui.Presenter(this, Model.getInstance());
     SwipeRefreshLayout swipeRefreshLayout;
     private CoordinatorLayout coordinatorLayout;
+    private FirebaseAnalytics firebaseAnalytics;
     private final String SPEAKER_KEY = "speaker";
     private final String SESSION_KEY = "session";
     enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -258,6 +261,15 @@ public class MainActivity extends AppCompatActivity
 
     public void attendingChange (View view) {
         Session session = (Session) view.getTag();
+        Bundle payload = new Bundle();
+
+        //session.getAttending hasn't changed yet so report opposite.
+        if (session.getAttending() != null && session.getAttending())
+            payload.putString(FirebaseAnalytics.Param.VALUE, "stopped attending");
+        else
+            payload.putString(FirebaseAnalytics.Param.VALUE, "is attending");
+
+        firebaseAnalytics.logEvent("attendingChange", payload);
         presenter.updateAttending(session.getId());
     }
 

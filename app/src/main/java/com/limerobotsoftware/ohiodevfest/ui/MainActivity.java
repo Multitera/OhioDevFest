@@ -39,6 +39,10 @@ import java.util.List;
 
 import io.realm.RealmList;
 
+import static com.limerobotsoftware.ohiodevfest.ui.MainActivity.FragmentTags.HOME;
+import static com.limerobotsoftware.ohiodevfest.ui.MainActivity.FragmentTags.SCHEDULE;
+import static com.limerobotsoftware.ohiodevfest.ui.MainActivity.FragmentTags.SPEAKERS;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity
     private CoordinatorLayout coordinatorLayout;
     private final String SPEAKER_KEY = "speaker";
     private final String SESSION_KEY = "session";
-    private enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
+    enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
     private FragmentTags currentFragment;
 
     @Override
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment(), FragmentTags.HOME.toString())
+                    .replace(R.id.fragment_container, new HomeFragment(), HOME.toString())
                     .commit();
         }
     }
@@ -124,31 +128,36 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
 
         if (id == R.id.nav_home) {
+            String tag = HOME.toString();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment(), FragmentTags.HOME.toString())
+                    .replace(R.id.fragment_container, getFragment(tag), tag)
                     .commit();
         } else if (id == R.id.nav_schedule) {
+            String tag = SCHEDULE.toString();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new ScheduleFragment(), FragmentTags.SCHEDULE.toString())
+                    .replace(R.id.fragment_container, getFragment(tag), tag)
                     .commit();
 
         } else if (id == R.id.nav_speakers) {
+            String tag = SPEAKERS.toString();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new SpeakerListFragment(), FragmentTags.SPEAKERS.toString())
+                    .replace(R.id.fragment_container, getFragment(tag), tag)
                     .commit();
         } else if (id == R.id.nav_partners) {
+            String tag = FragmentTags.PARTNERS.toString();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new PartnersFragment(), FragmentTags.PARTNERS.toString())
+                    .replace(R.id.fragment_container, getFragment(tag), tag)
                     .commit();
 
         } else if (id == R.id.nav_conduct) {
+            String tag = FragmentTags.CONDUCT.toString();
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new ConductFragment(), FragmentTags.CONDUCT.toString())
+                    .replace(R.id.fragment_container, getFragment(tag), tag)
                     .commit();
 
         }
@@ -156,6 +165,33 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private Fragment getFragment(String tag) {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
+        if (fragment == null) {
+
+            //#enumsMatter
+            switch (FragmentTags.valueOf(tag)) {
+                case HOME:
+                    fragment = new HomeFragment();
+                    break;
+                case SCHEDULE:
+                    fragment = new ScheduleFragment();
+                    break;
+                case SPEAKERS:
+                    fragment = new SpeakerListFragment();
+                    break;
+                case PARTNERS:
+                    fragment = new PartnersFragment();
+                    break;
+                case CONDUCT:
+                    fragment = new ConductFragment();
+                    break;
+            }
+        }
+
+        return fragment;
     }
 
     @Override

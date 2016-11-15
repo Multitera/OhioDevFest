@@ -6,7 +6,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity
 
     com.limerobotsoftware.ohiodevfest.ui.Presenter presenter = new com.limerobotsoftware.ohiodevfest.ui.Presenter(this, Model.getInstance());
     SwipeRefreshLayout swipeRefreshLayout;
+    private CoordinatorLayout coordinatorLayout;
     private final String SPEAKER_KEY = "speaker";
     private final String SESSION_KEY = "session";
     private enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(() -> {
             presenter.refreshData();
@@ -198,8 +202,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void refreshFinished () {
+    public void refreshFinished() {
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    public void retrofitFailed() {
+        refreshFinished();
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Failed to load data", Snackbar.LENGTH_INDEFINITE)
+                .setAction("RETRY", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        presenter.refreshData();
+                    }
+                });
+
+        snackbar.show();
     }
 
     public void attendingChange (View view) {

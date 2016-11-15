@@ -7,6 +7,7 @@ import com.limerobotsoftware.ohiodevfest.model.Speaker;
 
 import java.util.List;
 
+import rx.Observer;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -37,20 +38,56 @@ public class Presenter {
         scheduleFinished = false;
         sessionFinished = false;
         speakerFinished = false;
-        modelSubscriptions.add(model.downloadSchedulesFromNetwork().subscribe(list -> {
-            model.insertSchedule((List<Schedule>) list);
-            scheduleFinished = true;
-            checkAllFinished();
+        modelSubscriptions.add(model.downloadSchedulesFromNetwork().subscribe(new Observer() {
+            @Override
+            public void onCompleted() {
+                scheduleFinished = true;
+                checkAllFinished();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                refreshFailed();
+            }
+
+            @Override
+            public void onNext(Object list) {
+                model.insertSchedule((List<Schedule>) list);
+            }
         }));
-        modelSubscriptions.add(model.downloadSessionsFromNetwork().subscribe(list -> {
-            model.insertSessions((List<Session>) list);
-            sessionFinished = true;
-            checkAllFinished();
+        modelSubscriptions.add(model.downloadSessionsFromNetwork().subscribe(new Observer() {
+            @Override
+            public void onCompleted() {
+                sessionFinished = true;
+                checkAllFinished();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                refreshFailed();
+            }
+
+            @Override
+            public void onNext(Object list) {
+                model.insertSessions((List<Session>) list);
+            }
         }));
-        modelSubscriptions.add(model.downloadSpeakersFromNetwork().subscribe(list -> {
-            model.insertSpeakers((List<Speaker>) list);
-            speakerFinished = true;
-            checkAllFinished();
+        modelSubscriptions.add(model.downloadSpeakersFromNetwork().subscribe(new Observer() {
+            @Override
+            public void onCompleted() {
+                speakerFinished = true;
+                checkAllFinished();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                refreshFailed();
+            }
+
+            @Override
+            public void onNext(Object list) {
+                model.insertSpeakers((List<Speaker>) list);
+            }
         }));
     }
 
@@ -81,5 +118,10 @@ public class Presenter {
             model.addSessionSpeakerRelationships();
             model.addSessionsToTimeSlots();
         }
+    }
+
+    private void refreshFailed() {
+        modelSubscriptions.clear();
+        view.retrofitFailed();
     }
 }

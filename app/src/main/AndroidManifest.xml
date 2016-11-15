@@ -24,6 +24,7 @@
         <activity
             android:name=".ui.SpeakerActivity"
             android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".ui.MainActivity" >
             <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data

@@ -260,7 +260,11 @@ public class MainActivity extends AppCompatActivity
     public void attendingChange (View view) {
         Session session = (Session) view.getTag();
         Bundle payload = new Bundle();
-        payload.putString(FirebaseAnalytics.Param.VALUE, session.getTitle());
+
+        if (session.getSpeakerList().size() > 0)
+            payload.putString(FirebaseAnalytics.Param.VALUE, session.getSpeakerList().get(0).getName());
+        else
+            payload.putString(FirebaseAnalytics.Param.VALUE, session.getTitle());
 
         //session.getAttending hasn't changed yet so report opposite.
         if (session.getAttending() != null && session.getAttending())

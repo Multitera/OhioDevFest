@@ -322,7 +322,7 @@ public class MainActivity extends AppCompatActivity
     public void openWebpage(View view) {
         String tag = (String) view.getTag();
         Bundle payload = new Bundle();
-        payload.putString(FirebaseAnalytics.Param.VALUE, tag);
+        payload.putString(FirebaseAnalytics.Param.VALUE, tag.substring(0, 36));
         firebaseAnalytics.logEvent("webpageViewed", payload);
         startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(tag)));
     }

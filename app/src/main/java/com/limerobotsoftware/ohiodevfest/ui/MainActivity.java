@@ -268,9 +268,9 @@ public class MainActivity extends AppCompatActivity
 
         //session.getAttending hasn't changed yet so report opposite.
         if (session.getAttending() != null && session.getAttending())
-            firebaseAnalytics.logEvent("isAttending", payload);
-        else
             firebaseAnalytics.logEvent("stoppedAttending", payload);
+        else
+            firebaseAnalytics.logEvent("isAttending", payload);
 
         presenter.updateAttending(session.getId());
     }

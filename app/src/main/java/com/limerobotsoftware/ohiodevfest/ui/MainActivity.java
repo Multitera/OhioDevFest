@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new HomeFragment(), HOME.toString())
+                    .replace(R.id.fragment_container, getFragment(HOME.toString()), HOME.toString())
                     .commit();
         }
     }

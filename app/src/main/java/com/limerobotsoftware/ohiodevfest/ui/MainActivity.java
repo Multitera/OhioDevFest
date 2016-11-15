@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         if (savedInstanceState == null) {
+            navigationView.getMenu().getItem(0).setChecked(true);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, getFragment(HOME.toString()), HOME.toString())
@@ -127,44 +128,31 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        Fragment fragment = null;
+        String tag = null;
 
         if (id == R.id.nav_home) {
-            String tag = HOME.toString();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, getFragment(tag), tag)
-                    .commit();
+            tag = HOME.toString();
+
         } else if (id == R.id.nav_schedule) {
-            String tag = SCHEDULE.toString();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, getFragment(tag), tag)
-                    .commit();
+            tag = SCHEDULE.toString();
 
         } else if (id == R.id.nav_speakers) {
-            String tag = SPEAKERS.toString();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, getFragment(tag), tag)
-                    .commit();
+            tag = SPEAKERS.toString();
+
         } else if (id == R.id.nav_partners) {
-            String tag = FragmentTags.PARTNERS.toString();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, getFragment(tag), tag)
-                    .commit();
+            tag = FragmentTags.PARTNERS.toString();
 
         } else if (id == R.id.nav_conduct) {
-            String tag = FragmentTags.CONDUCT.toString();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, getFragment(tag), tag)
-                    .commit();
+            tag = FragmentTags.CONDUCT.toString();
 
         }
 
+        if (tag != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, getFragment(tag), tag)
+                    .commit();
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -43,7 +43,7 @@ public class SpeakerActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, getSpeakerFragment(), SPEAKER_KEY)
+                .replace(R.id.fragment_container, getSpeakerFragment(), SPEAKER_FRAGMENT_TAG)
                 .commit();
     }
 

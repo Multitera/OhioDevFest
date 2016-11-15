@@ -14,6 +14,9 @@ import com.limerobotsoftware.ohiodevfest.R;
 import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Social;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
+import com.limerobotsoftware.ohiodevfest.ui.SpeakerActivity;
+
+import org.parceler.Parcels;
 
 /**
  * Created by andy on 10/31/16.
@@ -42,6 +45,12 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
         title = (TextView) view.findViewById(R.id.title);
         description = (TextView) view.findViewById(R.id.description);
 
+        Bundle args = getArguments();
+        if (args != null) {
+            speaker = Parcels.unwrap(args.getParcelable(SpeakerActivity.SPEAKER_KEY));
+            session = Parcels.unwrap(args.getParcelable(SpeakerActivity.SESSION_KEY));
+        }
+
         return view;
     }
 
@@ -64,10 +73,4 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
             }
         }
     }
-
-    public void setSpeaker(Speaker speaker) {
-        this.speaker = speaker;
-    }
-
-    public void setSession(Session session) { this.session = session; }
 }

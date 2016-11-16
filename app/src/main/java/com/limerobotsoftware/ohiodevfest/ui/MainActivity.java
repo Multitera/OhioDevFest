@@ -206,6 +206,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     protected boolean showAboutDialog() {
+        Bundle payload = new Bundle();
+        payload.putString(FirebaseAnalytics.Param.VALUE, "LimeRobot!");
+        firebaseAnalytics.logEvent("aboutViewed", payload);
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme_PopupOverlay));
         builder.setPositiveButton(R.string.okButtonText, new DialogInterface.OnClickListener() {
             @Override

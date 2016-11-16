@@ -16,6 +16,8 @@
         android:text="App development donated by"/>
     <ImageView
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:src="@drawable/top_logo_1000x712_transparent"
-        android:layout_height="wrap_content" />
+        android:onClick="openWebpage"
+        android:tag="@string/limerobot_url" />
 </LinearLayout>

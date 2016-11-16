@@ -65,4 +65,5 @@
     <string name="speakers">Speakers</string>
     <string name="okButtonText">OK</string>
     <string name="about">About</string>
+    <string name="limerobot_url">http://limerobotsoftware.com/</string>
 </resources>

@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity
     com.limerobotsoftware.ohiodevfest.ui.Presenter presenter = new com.limerobotsoftware.ohiodevfest.ui.Presenter(this, Model.getInstance());
     SwipeRefreshLayout swipeRefreshLayout;
     private CoordinatorLayout coordinatorLayout;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
     private FirebaseAnalytics firebaseAnalytics;
     private final String SPEAKER_KEY = "speaker";
     private final String SESSION_KEY = "session";
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(() -> {
@@ -168,18 +171,23 @@ public class MainActivity extends AppCompatActivity
             //#enumsMatter
             switch (FragmentTags.valueOf(tag)) {
                 case HOME:
+                    collapsingToolbarLayout.setTitle(getResources().getString(R.string.app_name));
                     fragment = new HomeFragment();
                     break;
                 case SCHEDULE:
+                    collapsingToolbarLayout.setTitle(getResources().getString(R.string.schedule));
                     fragment = new ScheduleFragment();
                     break;
                 case SPEAKERS:
+                    collapsingToolbarLayout.setTitle(getResources().getString(R.string.speakers));
                     fragment = new SpeakerListFragment();
                     break;
                 case PARTNERS:
+                    collapsingToolbarLayout.setTitle(getResources().getString(R.string.partners));
                     fragment = new PartnersFragment();
                     break;
                 case CONDUCT:
+                    collapsingToolbarLayout.setTitle(getResources().getString(R.string.title_conduct));
                     fragment = new ConductFragment();
                     break;
             }

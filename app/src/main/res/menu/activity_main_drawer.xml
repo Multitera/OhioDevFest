@@ -5,23 +5,23 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_dev_fest_logo"
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_schedule"
             android:icon="@drawable/ic_menu_schedule"
-            android:title="Schedule" />
+            android:title="@string/schedule" />
         <item
             android:id="@+id/nav_speakers"
             android:icon="@drawable/ic_menu_speakers"
-            android:title="Speakers" />
+            android:title="@string/speakers" />
         <item
             android:id="@+id/nav_partners"
             android:icon="@drawable/ic_menu_partners"
-            android:title="Partners" />
+            android:title="@string/partners" />
         <item
             android:id="@+id/nav_conduct"
             android:icon="@drawable/ic_menu_info"
-            android:title="Code of Conduct" />
+            android:title="@string/title_conduct" />
     </group>
 
 </menu>

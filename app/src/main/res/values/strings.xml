@@ -36,7 +36,7 @@
     <string name="read_more">Read more</string>
     <string name="transition_name_photo">photo</string>
     <string name="event_sponsorships">Ohio DevFest 2016​ welcomes businesses that are looking to increase their presence in the Ohio regional tech communities by reaching local developers and technology focused individuals through event sponsorships.</string>
-    <string name="partners">PARTNERS</string>
+    <string name="partners">Partners</string>
     <string name="venue_sponsor">Venue Sponsor</string>
     <string name="uc_url">https://www.uc.edu/</string>
     <string name="uc_it_url">http://cech.uc.edu/it.html</string>
@@ -60,4 +60,7 @@
     <string name="eventbrite_url">https://www.eventbrite.com/e/ohio-devfest-tickets-25964520580</string>
     <string name="attend">Attend</string>
     <string name="attending">Attending</string>
+    <string name="home">Home</string>
+    <string name="schedule">Schedule</string>
+    <string name="speakers">Speakers</string>
 </resources>

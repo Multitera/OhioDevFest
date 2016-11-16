@@ -8,15 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:gravity="center"
-        android:text="@string/partners"
-        android:textColor="@android:color/black"
-        android:textSize="30sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:padding="8dp"
         android:gravity="center"
         android:text="@string/venue_sponsor"
         android:textSize="18sp" />
@@ -24,14 +16,13 @@
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         app:flexWrap="wrap"
         app:justifyContent="center">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/university_of_cincinnati"
             android:onClick="openWebpage"
             android:tag="@string/uc_url"/>
@@ -39,7 +30,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/school_of_information_technology"
             android:onClick="openWebpage"
             android:tag="@string/uc_it_url"/>
@@ -49,6 +40,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:gravity="center"
         android:text="@string/gold_sponsor"
         android:textSize="18sp" />
@@ -56,14 +48,13 @@
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         app:flexWrap="wrap"
         app:justifyContent="center">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/kroger"
             android:onClick="openWebpage"
             android:tag="@string/kroger_url"/>
@@ -73,6 +64,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
         android:gravity="center"
         android:text="@string/bronze_sponsors"
         android:textSize="18sp" />
@@ -80,14 +72,13 @@
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         app:flexWrap="wrap"
         app:justifyContent="center">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/cardinal_solutions_group"
             android:onClick="openWebpage"
             android:tag="@string/cardinal_url"/>
@@ -95,7 +86,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/dotloop"
             android:onClick="openWebpage"
             android:tag="@string/dotloop_url"/>
@@ -103,7 +94,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/lcs"
             android:onClick="openWebpage"
             android:tag="@string/lcs_url"/>
@@ -111,7 +102,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/krush"
             android:onClick="openWebpage"
             android:tag="@string/krush_url"/>
@@ -119,7 +110,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/roadtrippers"
             android:onClick="openWebpage"
             android:tag="@string/road_tripper_url"/>
@@ -127,7 +118,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/callibrity"
             android:onClick="openWebpage"
             android:tag="@string/callibrity_url"/>
@@ -135,7 +126,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/meddata"
             android:onClick="openWebpage"
             android:tag="@string/meddata_url"/>
@@ -145,6 +136,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
         android:gravity="center"
         android:text="@string/event_sponsor"
         android:textSize="18sp" />
@@ -152,14 +144,13 @@
     <com.google.android.flexbox.FlexboxLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         app:flexWrap="wrap"
         app:justifyContent="center">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/google_logo"
             android:onClick="openWebpage"
             android:tag="@string/google_url"/>
@@ -169,6 +160,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
         android:gravity="center"
         android:text="@string/organizers"
         android:textSize="18sp" />
@@ -183,7 +175,7 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/gdg_cincinnati"
             android:onClick="openWebpage"
             android:tag="@string/gdg_cin_url"/>
@@ -191,18 +183,11 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:padding="10dp"
+            android:padding="8dp"
             android:src="@drawable/gdg_columbus"
             android:onClick="openWebpage"
             android:tag="@string/gdg_col_url"/>
 
     </com.google.android.flexbox.FlexboxLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:text="@string/event_sponsorships"
-        android:textSize="14sp" />
 
 </LinearLayout>

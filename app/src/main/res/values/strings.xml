@@ -63,4 +63,6 @@
     <string name="home">Home</string>
     <string name="schedule">Schedule</string>
     <string name="speakers">Speakers</string>
+    <string name="okButtonText">OK</string>
+    <string name="about">About</string>
 </resources>

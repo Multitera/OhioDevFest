@@ -1,6 +1,7 @@
 package com.limerobotsoftware.ohiodevfest.ui;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -16,7 +17,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -151,6 +154,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_conduct) {
             tag = FragmentTags.CONDUCT.toString();
 
+        } else if (id == R.id.nav_about) {
+            showAboutDialog();
         }
 
         if (tag != null) {
@@ -198,6 +203,21 @@ public class MainActivity extends AppCompatActivity
         firebaseAnalytics.logEvent("fragmentViewed", payload);
 
         return fragment;
+    }
+
+    protected boolean showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AppTheme_PopupOverlay));
+        builder.setPositiveButton(R.string.okButtonText, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // do nothing other than close dialog
+            }
+        });
+        View layout = getLayoutInflater().inflate(R.layout.about, null);
+        builder.setView(layout);
+        builder.show();
+
+        return true;
     }
 
     @Override

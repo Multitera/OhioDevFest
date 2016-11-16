@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.limerobotsoftware.ohiodevfest.OhioDevFestApplication;
 import com.limerobotsoftware.ohiodevfest.R;
 import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Social;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
 import com.limerobotsoftware.ohiodevfest.ui.SpeakerActivity;
+import com.squareup.leakcanary.RefWatcher;
 
 import org.parceler.Parcels;
 
@@ -72,5 +74,11 @@ public class SpeakerFragment extends android.support.v4.app.Fragment {
                 gPlus.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_google_plus_box, null));
             }
         }
+    }
+
+    @Override public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = OhioDevFestApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 }

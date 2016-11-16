@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.limerobotsoftware.ohiodevfest.OhioDevFestApplication;
 import com.limerobotsoftware.ohiodevfest.R;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
 import com.limerobotsoftware.ohiodevfest.ui.adapter.SpeakerAdapter;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.List;
 
@@ -40,6 +42,12 @@ public class SpeakerListFragment extends android.support.v4.app.Fragment {
         recyclerView.setNestedScrollingEnabled(false);
         if (recyclerView.getAdapter() == null && adapter != null)
             recyclerView.setAdapter(adapter);
+    }
+
+    @Override public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = OhioDevFestApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 
     public void populateSpeakers(List<Speaker> speakers) {

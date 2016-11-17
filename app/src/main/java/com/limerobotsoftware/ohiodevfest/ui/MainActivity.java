@@ -12,7 +12,6 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -57,10 +56,9 @@ public class MainActivity extends AppCompatActivity
     private CoordinatorLayout coordinatorLayout;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private FirebaseAnalytics firebaseAnalytics;
-    private final String SPEAKER_KEY = "speaker";
-    private final String SESSION_KEY = "session";
+    private static final String SPEAKER_KEY = "speaker";
+    private static final String SESSION_KEY = "session";
     enum FragmentTags {HOME, SCHEDULE, SPEAKERS, PARTNERS, CONDUCT}
-    private FragmentTags currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -227,7 +225,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void refreshFragment(Fragment fragment) {
         FragmentTags fragmentTag = FragmentTags.valueOf(fragment.getTag());
-        currentFragment = fragmentTag;
 
         //#enumsMatter
         switch (fragmentTag) {
@@ -244,21 +241,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void pushSpeakers (List<Speaker> speakers) {
-        switch (currentFragment) {
+        switch (FragmentTags.valueOf(getSupportFragmentManager().findFragmentById(R.id.fragment_container).getTag())) {
             case HOME:
-                ((HomeFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateSpeakers(speakers);
+                ((HomeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container)).populateSpeakers(speakers);
                 break;
             case SPEAKERS:
-                ((SpeakerListFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateSpeakers(speakers);
+                ((SpeakerListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container)).populateSpeakers(speakers);
                 break;
         }
     }
 
     public void pushSchedule (List<Schedule> schedules) {
-        switch (currentFragment) {
+        switch (FragmentTags.valueOf(getSupportFragmentManager().findFragmentById(R.id.fragment_container).getTag())) {
             case SCHEDULE:
                 List<Timeslot> timeslots = schedules.get(0).getTimeslots();
-                ((ScheduleFragment) getSupportFragmentManager().findFragmentByTag(currentFragment.toString())).populateTimeslots(timeslots);
+                ((ScheduleFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container)).populateTimeslots(timeslots);
                 break;
         }
     }
@@ -315,9 +312,7 @@ public class MainActivity extends AppCompatActivity
         Bundle payload = new Bundle();
         payload.putString(FirebaseAnalytics.Param.VALUE, speaker.getName());
         firebaseAnalytics.logEvent("speakerViewed", payload);
-        TaskStackBuilder.create(this)
-                .addNextIntentWithParentStack(intent)
-                .startActivities();
+        startActivity(intent);
     }
 
     public void openGPlus(View view) {

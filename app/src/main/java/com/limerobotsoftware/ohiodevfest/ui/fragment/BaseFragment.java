@@ -10,7 +10,7 @@ import com.squareup.leakcanary.RefWatcher;
  * Created by andy on 11/16/16.
  */
 
-public class BaseFragment extends android.support.v4.app.Fragment{
+public class BaseFragment extends Fragment{
     FragmentMessenger messenger;
 
     public interface FragmentMessenger {

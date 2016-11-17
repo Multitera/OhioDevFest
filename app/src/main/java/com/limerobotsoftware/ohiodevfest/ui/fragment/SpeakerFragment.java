@@ -3,6 +3,7 @@ package com.limerobotsoftware.ohiodevfest.ui.fragment;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.limerobotsoftware.ohiodevfest.OhioDevFestApplication;
 import com.limerobotsoftware.ohiodevfest.R;
 import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Social;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
 import com.limerobotsoftware.ohiodevfest.ui.SpeakerActivity;
+import com.squareup.leakcanary.RefWatcher;
 
 import org.parceler.Parcels;
 
@@ -22,7 +25,7 @@ import org.parceler.Parcels;
  * Created by andy on 10/31/16.
  */
 
-public class SpeakerFragment extends BaseFragment {
+public class SpeakerFragment extends Fragment {
 
     TextView company;
     TextView bio;
@@ -72,5 +75,11 @@ public class SpeakerFragment extends BaseFragment {
                 gPlus.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_google_plus_box, null));
             }
         }
+    }
+    
+    @Override public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = OhioDevFestApplication.getRefWatcher(getActivity());
+        refWatcher.watch(this);
     }
 }

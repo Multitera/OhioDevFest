@@ -20,7 +20,7 @@ import java.util.List;
  * Created by andy on 10/30/16.
  */
 
-public class SpeakerListFragment extends android.support.v4.app.Fragment {
+public class SpeakerListFragment extends BaseFragment{
 
     private RecyclerView recyclerView;
     private SpeakerAdapter adapter;
@@ -38,6 +38,7 @@ public class SpeakerListFragment extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        messenger.refreshFragment(this);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.speakerListSpanCount)));
         recyclerView.setNestedScrollingEnabled(false);
         if (recyclerView.getAdapter() == null && adapter != null)

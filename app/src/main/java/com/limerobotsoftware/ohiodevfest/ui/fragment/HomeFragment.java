@@ -20,7 +20,7 @@ import java.util.List;
  * Created by andy on 10/26/16.
  */
 
-public class HomeFragment extends android.support.v4.app.Fragment {
+public class HomeFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private FeaturedSpeakerAdapter adapter;
@@ -38,6 +38,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        messenger.refreshFragment(this);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), getResources().getInteger(R.integer.featuredSpanCount)));
         recyclerView.setNestedScrollingEnabled(false);
         if (recyclerView.getAdapter() == null && adapter != null)

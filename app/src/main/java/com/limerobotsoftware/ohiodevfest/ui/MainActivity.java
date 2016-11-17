@@ -32,6 +32,7 @@ import com.limerobotsoftware.ohiodevfest.model.Schedule;
 import com.limerobotsoftware.ohiodevfest.model.Session;
 import com.limerobotsoftware.ohiodevfest.model.Speaker;
 import com.limerobotsoftware.ohiodevfest.model.Timeslot;
+import com.limerobotsoftware.ohiodevfest.ui.fragment.BaseFragment;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.ConductFragment;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.HomeFragment;
 import com.limerobotsoftware.ohiodevfest.ui.fragment.PartnersFragment;
@@ -49,7 +50,7 @@ import static com.limerobotsoftware.ohiodevfest.ui.MainActivity.FragmentTags.SCH
 import static com.limerobotsoftware.ohiodevfest.ui.MainActivity.FragmentTags.SPEAKERS;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BaseFragment.FragmentMessenger {
 
     com.limerobotsoftware.ohiodevfest.ui.Presenter presenter = new com.limerobotsoftware.ohiodevfest.ui.Presenter(this, Model.getInstance());
     SwipeRefreshLayout swipeRefreshLayout;
@@ -224,12 +225,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
-        refreshFragment(fragment);
-    }
-
-    private void refreshFragment(Fragment fragment) {
+    public void refreshFragment(Fragment fragment) {
         FragmentTags fragmentTag = FragmentTags.valueOf(fragment.getTag());
         currentFragment = fragmentTag;
 
@@ -268,7 +264,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void refreshFinished() {
+
         swipeRefreshLayout.setRefreshing(false);
+        refreshFragment(getSupportFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     public void retrofitFailed(String error) {

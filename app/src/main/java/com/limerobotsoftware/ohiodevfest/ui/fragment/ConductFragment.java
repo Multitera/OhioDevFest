@@ -14,7 +14,7 @@ import com.squareup.leakcanary.RefWatcher;
  * Created by andy on 11/3/16.
  */
 
-public class ConductFragment extends android.support.v4.app.Fragment {
+public class ConductFragment extends BaseFragment {
 
     @Nullable
     @Override

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by andy on 11/8/16.
  */
 
-public class ScheduleFragment extends android.support.v4.app.Fragment {
+public class ScheduleFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private TimeslotAdapter adapter;
@@ -38,6 +38,7 @@ public class ScheduleFragment extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        messenger.refreshFragment(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setNestedScrollingEnabled(false);
         if (recyclerView.getAdapter() == null && adapter != null)

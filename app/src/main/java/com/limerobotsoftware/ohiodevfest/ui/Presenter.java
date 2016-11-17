@@ -27,14 +27,11 @@ public class Presenter {
     public Presenter(MainActivity view, Model model) {
         this.view = view;
         this.model = model;
-        if (modelSubscriptions == null)
-            modelSubscriptions = new CompositeSubscription();
         refreshData();
     }
 
     public void refreshData() {
-        if (modelSubscriptions.hasSubscriptions())
-            modelSubscriptions.clear();
+        modelSubscriptions.clear();
         scheduleFinished = false;
         sessionFinished = false;
         speakerFinished = false;
@@ -92,14 +89,12 @@ public class Presenter {
     }
 
     public void getSpeakers(Boolean featured, Integer[] ids) {
-        if (viewSubscriptions.hasSubscriptions())
-            viewSubscriptions.clear();
+        viewSubscriptions.clear();
         viewSubscriptions.add(model.findSpeakers(featured, ids).subscribe(view::pushSpeakers));
     }
 
     public void getSchedule(String date) {
-        if (viewSubscriptions.hasSubscriptions())
-            viewSubscriptions.clear();
+        viewSubscriptions.clear();
         viewSubscriptions.add(model.findSchedule(date).subscribe(view::pushSchedule));
     }
 
@@ -108,8 +103,8 @@ public class Presenter {
     }
 
     public void onPause() {
-        modelSubscriptions.unsubscribe();
-        viewSubscriptions.unsubscribe();
+        modelSubscriptions.clear();
+        viewSubscriptions.clear();
     }
 
     public void checkAllFinished() {

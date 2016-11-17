@@ -76,7 +76,7 @@ public class SpeakerFragment extends Fragment {
             }
         }
     }
-    
+
     @Override public void onDestroy() {
         super.onDestroy();
         RefWatcher refWatcher = OhioDevFestApplication.getRefWatcher(getActivity());
